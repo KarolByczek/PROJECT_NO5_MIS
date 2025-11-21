@@ -271,7 +271,7 @@ const Carousel: React.FC = () => {
 
   // Render even if slideWidthPx is 0 (we no longer block rendering)
   if (!extendedSlides.length) {
-    return <div className="carousel-loading">Loading...</div>;
+    return <div className="carousel-loading">Ładowanie...</div>;
   }
 
   return (
