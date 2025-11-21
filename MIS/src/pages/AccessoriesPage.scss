@@ -1,0 +1,98 @@
+.portraits_section .portrait {
+    width: 99vw;
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    margin-top: 2rem;
+    border: 0.2rem solid crimson;
+}
+
+
+.portraits_section .portrait .about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 33%;
+}
+
+.portraits_section .portrait .comments_box {
+    width: 33%;
+}
+
+.portraits_section .portrait .comments_box .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.portraits_section .portrait .comments_box .comments .comment {
+    background-color: cadetblue;
+    padding: 1rem;
+}
+
+.portraits_section .portrait .comments_box .comments .comment .signature {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.portraits_section .portrait .comments_box .comments .comment .date {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.portraits_section .portrait .comments_box .add_button {
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    margin-top: 2rem;
+    background-color: aquamarine;
+}
+
+#add_comment_modal {
+    position: fixed;
+    top: 35vh;
+    left: 20vw;
+    right: 20vw;
+    background-color: rgb(242, 125, 86);
+    height: fit-content;
+    z-index: 55;
+    border: 0.5rem solid red;
+    border-radius: 0.3rem;
+    font-weight: bold;
+    padding: 1rem;
+}
+
+#add_comment_modal form {
+    display: flex;
+    flex-direction: column;
+}
+
+#add_comment_modal .success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    margin: 1rem 0;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+#add_comment_modal form button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

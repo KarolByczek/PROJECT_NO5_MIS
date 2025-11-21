@@ -1,0 +1,98 @@
+section {
+  background-color: rgb(241, 244, 245);
+
+  .expo_header {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    margin-top: 3%;
+    font-size: 1.8rem;
+  }
+
+  .expo_header .ending {
+    font-size: 1.8rem;
+  }
+
+  .grid_menu_section {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    margin-top: 3%;
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    .entries {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+
+
+      .entry {
+        display: block;
+        width: 70vw;
+        border: 0.2rem solid blueviolet;
+        border-radius: 0.4rem;
+        background-image: url(src/assets/texture-1668148_1280.jpg);
+        background-size: cover;
+        background-position: center;
+        color: black;
+        font-size: larger;
+        font-weight: 700;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: justify;
+        word-wrap: break-word;
+        padding: 2%;
+        transition: all 0.3s;
+      }
+
+      .entry:hover {
+        border-width: 0.3rem;
+      }
+
+    }
+
+  }
+
+  footer {
+    background-image: url(src/assets/artwork-7141107_1280.png);
+    background-size: cover;
+    background-position: center;
+    height: 25vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 3rem;
+
+    .footer_signature {
+      text-decoration: underline;
+    }
+
+  }
+
+}
+
+@media (max-width: 720px) {
+
+  section .grid_menu_section .entries .entry {
+    width: 80vw;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  section .expo_header {
+    font-size: 1.8rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  section .grid_menu_section .entries .entry {
+    width: 95vw;
+  }
+
+}

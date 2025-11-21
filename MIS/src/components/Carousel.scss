@@ -1,0 +1,129 @@
+:root {
+  --btn-w: 3.2rem;
+  /* button width */
+  --side-gap: 0.6rem;
+  /* space between buttons and slides (visual gutter) */
+  --slide-gap: 0.5rem;
+  /* space between slides */
+}
+
+/* OUTER container: padding reserves gutters for buttons + side gap */
+.carousel {
+  position: relative;
+  width: 100%;
+  /* reserve: button width + a little side gap */
+  padding-left: calc(var(--btn-w) + var(--side-gap));
+  padding-right: calc(var(--btn-w) + var(--side-gap));
+  box-sizing: border-box;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+/* Buttons (sit in the padded gutter) */
+.slider_button {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: var(--btn-w);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 30;
+  font-size: 2.8rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.slider_button.left {
+  left: 0;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.slider_button.right {
+  right: 0;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.slider_button:hover {
+  background-color: #474971;
+  transform: scale(1.02);
+  font-size: 3.5rem;
+}
+
+/* viewport: center visible area (no additional padding) */
+.carousel-viewport {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  /* IMPORTANT: no inner padding */
+}
+
+/* slider track: use separate slide gap variable */
+.carousel-slider {
+  display: flex;
+  gap: var(--slide-gap);
+  align-items: stretch;
+  will-change: transform;
+  cursor: grab;
+}
+
+.carousel-slider:active {
+  cursor: grabbing;
+}
+
+.carousel-slide {
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  outline: none !important;
+
+  /* enforce the requested ratio (width : height = 55 : 65) */
+  aspect-ratio: 55 / 65;
+  overflow: hidden;
+  border-radius: 0.9rem;
+
+  /* ensure it never tries to be wider than the viewport area */
+  max-width: 100%;
+}
+
+/* image fills the slide box */
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+/* mobile adjustments */
+@media (max-width: 720px) {
+
+  :root {
+    --btn-w: 2.2rem;
+    --side-gap: 0.4rem;
+  }
+
+  .slider_button {
+    display: none;
+  }
+
+  /* remove gutters so slides can expand */
+  .carousel {
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+}
+
+
+/* loading */
+.carousel-loading {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+}

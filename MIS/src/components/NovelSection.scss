@@ -1,0 +1,39 @@
+.novel_section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(181, 111, 127);
+    margin-top: 3rem;
+    padding-bottom: 7rem;
+
+    .headline {
+
+    }
+
+    .description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: justify;
+        word-wrap: break-word;
+        padding: 2%;
+    }
+
+    a {
+        position: absolute;
+        bottom: 1rem;
+        padding: 2rem;
+        border: 2px solid black;
+        border-radius: 2rem;
+        background-color: rgb(42, 91, 133);
+        margin-bottom: 1rem;
+        color: wheat;
+        transition: all 0.3s;
+    }
+
+    a:hover {
+        border: 4px solid black;
+    }
+
+}
