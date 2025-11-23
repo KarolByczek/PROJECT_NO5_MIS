@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const AddCommentModal = (props) => {
     const { currentPortrait } = useCurrentPortrait();
-    const portraitKey = currentPortrait?.portraitKey;
+    const portraitKey = currentPortrait?.entryKey;
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
 

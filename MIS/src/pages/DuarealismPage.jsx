@@ -3,12 +3,12 @@ import HeadStrip from "../components/HeadStrip";
 import Menu from "../components/Menu";
 import { Helmet } from "react-helmet-async";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
-import { thirdDb } from "../../AUXILIARY_OBJECTS/PortraitsDB";
+import { DuarealismDb } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import AddCommentModal from "../components/AddCommentModal";
 import { useCurrentPortrait } from "../components/CurrentPortraitContext";
 import "./AccessoriesPage.scss"
 
-const UniformismPage = () => {
+const DuarealismPage = () => {
 
   const [dbdata, setDbdata] = useState([]);
   const [commentmodal, setCommentModal] = useState(false);
@@ -22,11 +22,11 @@ const UniformismPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const docRef = doc(thirdDb, "PortraitData", "NsXOGRWHw71ZuLGxy2BQ");
+        const docRef = doc(DuarealismDb, "DuarealismEntries", "XkDAMBaYWifBr5JTKPr9");
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          const docData = docSnap.data(); // ✅ This is your big object
+          const docData = docSnap.data(); // ✅ This is your big entry object
 
           const initArray = [];
           Object.entries(docData).forEach(([key, value]) => {
@@ -52,21 +52,21 @@ const UniformismPage = () => {
     console.log(currentPortrait);
   };
 
-  const addCommentToPortrait = (entryKey, newComment) => {
+  const addCommentToEntry = (entryKey, newComment) => {
     const commentKey = `comment_${newComment.id}`;
 
     setDbdata((prevData) =>
-      prevData.map((portrait) => {
-        if (portrait.entryKey === entryKey) {
+      prevData.map((entry) => {
+        if (entry.entryKey === entryKey) {
           return {
-            ...portrait,
-            portrait_comments: {
-              ...portrait.portrait_comments,
+            ...entry,
+            entry_comments: {
+              ...entry.entry_comments,
               [commentKey]: newComment,
             },
           };
         }
-        return portrait;
+        return entry;
       })
     );
   };
@@ -74,8 +74,8 @@ const UniformismPage = () => {
   const handleUpdateComment = async (e, commentId, entryKey) => {
     e.preventDefault();
 
-    const docRef = doc(thirdDb, "PortraitData", "NsXOGRWHw71ZuLGxy2BQ");
-    const updatedPath = `${entryKey}.portrait_comments.comment_${commentId}.content`;
+    const docRef = doc(DuarealismDb, "DuarealismEntries", "XkDAMBaYWifBr5JTKPr9");
+    const updatedPath = `${entryKey}.entry_comments.comment_${commentId}.content`;
 
     try {
       await updateDoc(docRef, {
@@ -83,9 +83,9 @@ const UniformismPage = () => {
       });
 
       setDbdata(prevData =>
-        prevData.map(portrait => {
-          if (portrait.entryey === entryKey) {
-            const updatedComments = { ...portrait.portrait_comments };
+        prevData.map(entry => {
+          if (entry.entryKey === entryKey) {
+            const updatedComments = { ...entry.entry_comments };
             const commentKey = Object.keys(updatedComments).find(
               key => updatedComments[key].id === commentId
             );
@@ -98,11 +98,11 @@ const UniformismPage = () => {
             }
 
             return {
-              ...portrait,
-              portrait_comments: updatedComments,
+              ...entry,
+              entry_comments: updatedComments,
             };
           }
-          return portrait;
+          return entry;
         })
       );
 
@@ -130,34 +130,34 @@ const UniformismPage = () => {
   return (
     <>
       <Helmet>
-        <title>UNIFORMIZM</title>
+        <title>DUAREALIZM</title>
       </Helmet>
       <HeadStrip />
       <Menu />
       <h1>
-        UNIFORMIZM
+        DUAREALIZM
       </h1>
       <div className="portraits_section">
-        {dbdata.map((portrait) => {
+        {dbdata.map((entry) => {
           return (
-            <div className="portrait" key={portrait.entryKey}>
-              <img className="image" src={portrait.portrait_URL} alt="apicture" style={portrait.position === "vertical" ? styleVertical : styleHorizontal} />
+            <div className="portrait" key={entry.entryKey}>
+              <img className="image" src={entry.entryURL} alt="apicture" style={entry.entry_position === "vertical" ? styleVertical : styleHorizontal} />
               <div className="about">
                 <p>
-                  <strong>{portrait.portrait_name}</strong>
+                  <strong>{entry.entry_name}</strong>
                 </p>
                 <p>
-                  {portrait.portrait_description}
+                  {entry.entry_description}
                 </p>
               </div>
               <div className="comments_box">
-                {[...Object.values(portrait.portrait_comments)].length > 0 ? <h3>COMMENTS:</h3> : null}
+                {[...Object.values(entry.entry_comments)].length > 0 ? <h3>COMMENTS:</h3> : null}
                 <div className="comments">
-                  {Object.values(portrait.portrait_comments)
+                  {Object.values(entry.entry_comments)
                     .sort((a, b) => Number(b.id) - Number(a.id)) // ⬅️ Ascending (newest to oldest)
                     .map((acomment) => {
                       return acomment.id === editingCommentId ? (
-                        <form key={acomment.id} onSubmit={(e) => handleUpdateComment(e, acomment.id, portrait.portraitKey)}>
+                        <form key={acomment.id} onSubmit={(e) => handleUpdateComment(e, acomment.id, entry.entryKey)}>
                           <textarea
                             autoFocus
                             value={editingContent}
@@ -184,7 +184,7 @@ const UniformismPage = () => {
                     })
                   }
                 </div>
-                <button className="add_button" onClick={() => onClickHandler(portrait)}>
+                <button className="add_button" onClick={() => onClickHandler(entry)}>
                   ADD A COMMENT
                 </button>
               </div>
@@ -194,7 +194,7 @@ const UniformismPage = () => {
       {commentmodal === true ? (
         <AddCommentModal
           setter01={setCommentModal}
-          setter02={addCommentToPortrait}
+          setter02={addCommentToEntry}
         />
       ) : null}
 
@@ -202,4 +202,4 @@ const UniformismPage = () => {
   )
 }
 
-export default UniformismPage;
+export default DuarealismPage;

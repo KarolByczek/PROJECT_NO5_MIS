@@ -3,33 +3,10 @@ import Menu from './components/Menu';
 import Carousel from "./components/Carousel";
 import NovelSection from "./components/NovelSection.tsx";
 import "./HomePage.scss"
-import { useEffect } from 'react';
-import { collection, QueryDocumentSnapshot, getDocs } from "firebase/firestore";
-import { secondaryDb } from './../AUXILIARY_OBJECTS/GridMenuItems';
 import { Link } from 'react-router';
 
 
 function HomePage() {
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(secondaryDb, 'GridMenuItems'));
-        const initArray: Record<string, any>[] = [];
-        querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
-          console.log(doc.id, ' => ', doc.data());
-          const docObject = doc.data();
-          initArray.push(...Object.values(docObject));
-          console.log(initArray);
-        });
-      } catch (error) {
-        console.error("Error fetching Firestore data: ", error);
-      }
-    };
-
-    fetchData(); // Call the async function to fetch data
-  }, []);
-
 
   return (
     <>
