@@ -32,7 +32,7 @@ const AddCommentModal = (props) => {
 
         try {
             await updateDoc(CommentRef, {
-                [`${entryKey}.portrait_comments.${commentKey}`]: specComment
+                [`${entryKey}.entry_comments.${commentKey}`]: specComment
             });
 
             props.setter02(entryKey, specComment);

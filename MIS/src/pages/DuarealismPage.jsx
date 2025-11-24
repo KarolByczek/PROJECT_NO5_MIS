@@ -76,7 +76,7 @@ const UniformismPage = () => {
   const handleUpdateComment = async (e, commentId, entryKey) => {
     e.preventDefault();
 
-    const updatedPath = `${entryKey}.portrait_comments.comment_${commentId}.content`;
+    const updatedPath = `${entryKey}.entry_comments.comment_${commentId}.content`;
 
     try {
       await updateDoc(currentRef, {
