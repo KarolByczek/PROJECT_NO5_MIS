@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { DuarealismDb } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import AddCommentModal from "../components/AddCommentModal";
-import "./AccessoriesPage.scss"
+import "./SubPageStyle.scss"
 
 const UniformismPage = () => {
 
@@ -138,10 +138,10 @@ const UniformismPage = () => {
       <h1>
         DUAREALIZM
       </h1>
-      <div className="portraits_section">
+      <div className="entries_section">
         {dbdata.map((entry) => {
           return (
-            <div className="portrait" key={entry.entryKey}>
+            <div className="entry" key={entry.entryKey}>
               <img className="image" src={entry.entryURL} alt="apicture" style={entry.entry_position === "vertical" ? styleVertical : styleHorizontal} />
               <div className="about">
                 <p>

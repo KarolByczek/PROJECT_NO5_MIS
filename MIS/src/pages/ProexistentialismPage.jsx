@@ -3,17 +3,16 @@ import HeadStrip from "../components/HeadStrip";
 import Menu from "../components/Menu";
 import { Helmet } from "react-helmet-async";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
-import { UniformismDb } from "../../AUXILIARY_OBJECTS/UniformismDB";
+import { ProEgsDb } from "../../AUXILIARY_OBJECTS/ProegsDB";
 import AddCommentModal from "../components/AddCommentModal";
 import "./SubPageStyle.scss"
 
-const UniformismPage = () => {
+const ProegsistentialismPage = () => {
 
   const [dbdata, setDbdata] = useState([]);
   const [commentmodal, setCommentModal] = useState(false);
   const [currentPortrait, setCurrentPortrait] = useState(null);
   const [editingCommentId, setEditingCommentId] = useState(null);
-  const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
   const styleVertical = { width: "12rem", height: "20rem" };
   const styleHorizontal = { width: "22rem", height: "15rem" };
@@ -22,7 +21,7 @@ const UniformismPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const docRef = doc(UniformismDb, "UniformismEntries", "HcUgEibmxPkwTjQdlCNP");
+        const docRef = doc(ProEgsDb, "ProEgsEntries", "cFTgQnvX3DwLJk6uzOd4");
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -34,7 +33,6 @@ const UniformismPage = () => {
           });
 
           setDbdata(initArray);
-          setCurrentRef(docRef);
           console.log(currentRef);
         } else {
           console.error("Document does not exist!");
@@ -79,7 +77,7 @@ const UniformismPage = () => {
     const updatedPath = `${entryKey}.entry_comments.comment_${commentId}.content`;
 
     try {
-      await updateDoc(currentRef, {
+      await updateDoc(doc(ProEgsDb, "ProEgsEntries", "cFTgQnvX3DwLJk6uzOd4"), {
         [updatedPath]: editingContent,
       });
 
@@ -131,12 +129,12 @@ const UniformismPage = () => {
   return (
     <>
       <Helmet>
-        <title>UNIFORMIZM</title>
+        <title>PROEGZYSTENCJALIZM</title>
       </Helmet>
       <HeadStrip />
       <Menu />
       <h1>
-        UNIFORMIZM
+        PROEGZYSTENCJALIZM
       </h1>
       <div className="entries_section">
         {dbdata.map((entry) => {
@@ -196,7 +194,7 @@ const UniformismPage = () => {
         <AddCommentModal
           setter01={setCommentModal}
           setter02={addCommentToPortrait}
-          state01={currentRef}
+          state01={doc(ProEgsDb, "ProEgsEntries", "cFTgQnvX3DwLJk6uzOd4")}
           state02={currentPortrait}
         />
       ) : null}
@@ -205,4 +203,4 @@ const UniformismPage = () => {
   )
 }
 
-export default UniformismPage;
+export default ProegsistentialismPage;

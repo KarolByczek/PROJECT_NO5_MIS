@@ -1,4 +1,4 @@
-.portraits_section .portrait {
+.entries_section .entry {
     width: 99vw;
     display: flex;
     flex-direction: row;
@@ -8,18 +8,18 @@
 }
 
 
-.portraits_section .portrait .about {
+.entries_section .entry .about {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 33%;
 }
 
-.portraits_section .portrait .comments_box {
+.entries_section .entry .comments_box {
     width: 33%;
 }
 
-.portraits_section .portrait .comments_box .comments {
+.entries_section .entry .comments_box .comments {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -27,24 +27,24 @@
     overflow-y: scroll;
 }
 
-.portraits_section .portrait .comments_box .comments .comment {
+.entries_section .entry .comments_box .comments .comment {
     background-color: cadetblue;
     padding: 1rem;
 }
 
-.portraits_section .portrait .comments_box .comments .comment .signature {
+.entries_section .entry .comments_box .comments .comment .signature {
     display: flex;
     flex-direction: row;
     justify-content: end;
 }
 
-.portraits_section .portrait .comments_box .comments .comment .date {
+.entries_section .entry .comments_box .comments .comment .date {
     display: flex;
     flex-direction: row;
     justify-content: end;
 }
 
-.portraits_section .portrait .comments_box .add_button {
+.entries_section .entry .comments_box .add_button {
     display: flex;
     flex-direction: row;
     justify-self: center;

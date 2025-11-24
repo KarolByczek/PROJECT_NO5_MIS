@@ -1,9 +1,9 @@
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
-import DuarealismPage from './pages/DuarealismPage';
-import ProexistentialismPage from './pages/ProexistentialismPage';
+import DuarealismPage from './pages/DuarealismPage.jsx';
+import ProexistentialismPage from './pages/ProexistentialismPage.jsx';
 import { HelmetProvider } from 'react-helmet-async';
-import UniformismPage from './pages/UniformismPage';
+import UniformismPage from './pages/UniformismPage.jsx';
 import './index.scss';
 
 
