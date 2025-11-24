@@ -2,11 +2,11 @@ import { updateDoc } from "firebase/firestore";
 import { useState } from "react";
 
 const AddCommentModal = (props) => {
-    const portraitKey = props.state02.portraitKey;
+    const entryKey = props.state02.entryKey;
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    if (!portraitKey) {
+    if (!entryKey) {
         console.error("No portraitKey found in currentPortrait");
         return null;
     }
@@ -32,10 +32,10 @@ const AddCommentModal = (props) => {
 
         try {
             await updateDoc(CommentRef, {
-                [`${portraitKey}.portrait_comments.${commentKey}`]: specComment
+                [`${entryKey}.portrait_comments.${commentKey}`]: specComment
             });
 
-            props.setter02(portraitKey, specComment);
+            props.setter02(entryKey, specComment);
             console.log("Comment added successfully!");
             setSuccess(true);
             form.reset(); // ✅ Clear form after success

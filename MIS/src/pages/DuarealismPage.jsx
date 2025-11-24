@@ -5,15 +5,15 @@ import { Helmet } from "react-helmet-async";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { DuarealismDb } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import AddCommentModal from "../components/AddCommentModal";
-import { useCurrentPortrait } from "../components/CurrentPortraitContext";
 import "./AccessoriesPage.scss"
 
-const DuarealismPage = () => {
+const UniformismPage = () => {
 
   const [dbdata, setDbdata] = useState([]);
   const [commentmodal, setCommentModal] = useState(false);
-  const { currentPortrait, setCurrentPortrait } = useCurrentPortrait({});
+  const [currentPortrait, setCurrentPortrait] = useState(null);
   const [editingCommentId, setEditingCommentId] = useState(null);
+  const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
   const styleVertical = { width: "12rem", height: "20rem" };
   const styleHorizontal = { width: "22rem", height: "15rem" };
@@ -26,7 +26,7 @@ const DuarealismPage = () => {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          const docData = docSnap.data(); // ✅ This is your big entry object
+          const docData = docSnap.data(); // ✅ This is your big object
 
           const initArray = [];
           Object.entries(docData).forEach(([key, value]) => {
@@ -34,6 +34,8 @@ const DuarealismPage = () => {
           });
 
           setDbdata(initArray);
+          setCurrentRef(docRef);
+          console.log(currentRef);
         } else {
           console.error("Document does not exist!");
         }
@@ -43,7 +45,7 @@ const DuarealismPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [setDbdata]);
 
 
   const onClickHandler = (current_one) => {
@@ -52,7 +54,7 @@ const DuarealismPage = () => {
     console.log(currentPortrait);
   };
 
-  const addCommentToEntry = (entryKey, newComment) => {
+  const addCommentToPortrait = (entryKey, newComment) => {
     const commentKey = `comment_${newComment.id}`;
 
     setDbdata((prevData) =>
@@ -74,11 +76,10 @@ const DuarealismPage = () => {
   const handleUpdateComment = async (e, commentId, entryKey) => {
     e.preventDefault();
 
-    const docRef = doc(DuarealismDb, "DuarealismEntries", "XkDAMBaYWifBr5JTKPr9");
-    const updatedPath = `${entryKey}.entry_comments.comment_${commentId}.content`;
+    const updatedPath = `${entryKey}.portrait_comments.comment_${commentId}.content`;
 
     try {
-      await updateDoc(docRef, {
+      await updateDoc(currentRef, {
         [updatedPath]: editingContent,
       });
 
@@ -130,12 +131,12 @@ const DuarealismPage = () => {
   return (
     <>
       <Helmet>
-        <title>DUAREALIZM</title>
+        <title>UNIFORMIZM</title>
       </Helmet>
       <HeadStrip />
       <Menu />
       <h1>
-        DUAREALIZM
+        UNIFORMIZM
       </h1>
       <div className="portraits_section">
         {dbdata.map((entry) => {
@@ -194,7 +195,9 @@ const DuarealismPage = () => {
       {commentmodal === true ? (
         <AddCommentModal
           setter01={setCommentModal}
-          setter02={addCommentToEntry}
+          setter02={addCommentToPortrait}
+          state01={currentRef}
+          state02={currentPortrait}
         />
       ) : null}
 
@@ -202,4 +205,4 @@ const DuarealismPage = () => {
   )
 }
 
-export default DuarealismPage;
+export default UniformismPage;
