@@ -1,11 +1,8 @@
-import { doc, updateDoc } from "firebase/firestore";
-import { thirdDb } from "../../AUXILIARY_OBJECTS/PortraitsDB";
-import { useCurrentPortrait } from './CurrentPortraitContext';
+import { updateDoc } from "firebase/firestore";
 import { useState } from "react";
 
 const AddCommentModal = (props) => {
-    const { currentPortrait } = useCurrentPortrait();
-    const portraitKey = currentPortrait?.entryKey;
+    const portraitKey = props.state02.portraitKey;
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -30,7 +27,7 @@ const AddCommentModal = (props) => {
         const specformdata = new FormData(form);
         const specComment = makeComment(specformdata);
 
-        const CommentRef = doc(thirdDb, "PortraitData", "NsXOGRWHw71ZuLGxy2BQ");
+        const CommentRef = props.state01;
         const commentKey = `comment_${Date.now()}`;
 
         try {

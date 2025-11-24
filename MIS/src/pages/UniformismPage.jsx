@@ -5,15 +5,15 @@ import { Helmet } from "react-helmet-async";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { thirdDb } from "../../AUXILIARY_OBJECTS/PortraitsDB";
 import AddCommentModal from "../components/AddCommentModal";
-import { useCurrentPortrait } from "../components/CurrentPortraitContext";
 import "./AccessoriesPage.scss"
 
 const UniformismPage = () => {
 
   const [dbdata, setDbdata] = useState([]);
   const [commentmodal, setCommentModal] = useState(false);
-  const { currentPortrait, setCurrentPortrait } = useCurrentPortrait({});
+  const [currentPortrait, setCurrentPortrait] = useState(null);
   const [editingCommentId, setEditingCommentId] = useState(null);
+  const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
   const styleVertical = { width: "12rem", height: "20rem" };
   const styleHorizontal = { width: "22rem", height: "15rem" };
@@ -30,10 +30,12 @@ const UniformismPage = () => {
 
           const initArray = [];
           Object.entries(docData).forEach(([key, value]) => {
-            initArray.push({ ...value, entryKey: key });
+            initArray.push({ ...value, portraitKey: key });
           });
 
           setDbdata(initArray);
+          setCurrentRef(docRef);
+          console.log(currentRef);
         } else {
           console.error("Document does not exist!");
         }
@@ -43,7 +45,7 @@ const UniformismPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [setDbdata]);
 
 
   const onClickHandler = (current_one) => {
@@ -52,12 +54,12 @@ const UniformismPage = () => {
     console.log(currentPortrait);
   };
 
-  const addCommentToPortrait = (entryKey, newComment) => {
+  const addCommentToPortrait = (portraitKey, newComment) => {
     const commentKey = `comment_${newComment.id}`;
 
     setDbdata((prevData) =>
       prevData.map((portrait) => {
-        if (portrait.entryKey === entryKey) {
+        if (portrait.portraitKey === portraitKey) {
           return {
             ...portrait,
             portrait_comments: {
@@ -71,11 +73,11 @@ const UniformismPage = () => {
     );
   };
 
-  const handleUpdateComment = async (e, commentId, entryKey) => {
+  const handleUpdateComment = async (e, commentId, portraitKey) => {
     e.preventDefault();
 
     const docRef = doc(thirdDb, "PortraitData", "NsXOGRWHw71ZuLGxy2BQ");
-    const updatedPath = `${entryKey}.portrait_comments.comment_${commentId}.content`;
+    const updatedPath = `${portraitKey}.portrait_comments.comment_${commentId}.content`;
 
     try {
       await updateDoc(docRef, {
@@ -84,7 +86,7 @@ const UniformismPage = () => {
 
       setDbdata(prevData =>
         prevData.map(portrait => {
-          if (portrait.entryey === entryKey) {
+          if (portrait.portraitKey === portraitKey) {
             const updatedComments = { ...portrait.portrait_comments };
             const commentKey = Object.keys(updatedComments).find(
               key => updatedComments[key].id === commentId
@@ -140,7 +142,7 @@ const UniformismPage = () => {
       <div className="portraits_section">
         {dbdata.map((portrait) => {
           return (
-            <div className="portrait" key={portrait.entryKey}>
+            <div className="portrait" key={portrait.portraitKey}>
               <img className="image" src={portrait.portrait_URL} alt="apicture" style={portrait.position === "vertical" ? styleVertical : styleHorizontal} />
               <div className="about">
                 <p>
@@ -195,6 +197,8 @@ const UniformismPage = () => {
         <AddCommentModal
           setter01={setCommentModal}
           setter02={addCommentToPortrait}
+          state01={currentRef}
+          state02={currentPortrait}
         />
       ) : null}
 
