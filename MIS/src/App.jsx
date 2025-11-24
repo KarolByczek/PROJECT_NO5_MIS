@@ -4,14 +4,12 @@ import DuarealismPage from './pages/DuarealismPage';
 import ProexistentialismPage from './pages/ProexistentialismPage';
 import { HelmetProvider } from 'react-helmet-async';
 import UniformismPage from './pages/UniformismPage';
-import { CurrentPortraitProvider } from './components/CurrentPortraitContext';
 import './index.scss';
 
 
 function App() {
   return (
     <HelmetProvider>
-      <CurrentPortraitProvider>
         <Router>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -20,7 +18,6 @@ function App() {
             <Route path="/uniformizm" element={<UniformismPage />}></Route>
           </Routes>
         </Router>
-      </CurrentPortraitProvider>
     </HelmetProvider>
   );
 }

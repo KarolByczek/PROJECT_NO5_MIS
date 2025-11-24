@@ -131,12 +131,12 @@ const UniformismPage = () => {
   return (
     <>
       <Helmet>
-        <title>UNIFORMIZM</title>
+        <title>DUAREALIZM</title>
       </Helmet>
       <HeadStrip />
       <Menu />
       <h1>
-        UNIFORMIZM
+        DUAREALIZM
       </h1>
       <div className="portraits_section">
         {dbdata.map((entry) => {
