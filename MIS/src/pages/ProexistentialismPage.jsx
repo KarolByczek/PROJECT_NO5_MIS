@@ -12,6 +12,7 @@ const ProegsistentialismPage = () => {
   const [dbdata, setDbdata] = useState([]);
   const [commentmodal, setCommentModal] = useState(false);
   const [currentPortrait, setCurrentPortrait] = useState(null);
+  const [currentRef, setCurrentRef] = useState(null);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingContent, setEditingContent] = useState("");
   const styleVertical = { width: "12rem", height: "20rem" };
@@ -33,6 +34,7 @@ const ProegsistentialismPage = () => {
           });
 
           setDbdata(initArray);
+          setCurrentRef(docRef);
           console.log(currentRef);
         } else {
           console.error("Document does not exist!");
@@ -194,7 +196,7 @@ const ProegsistentialismPage = () => {
         <AddCommentModal
           setter01={setCommentModal}
           setter02={addCommentToPortrait}
-          state01={doc(ProEgsDb, "ProEgsEntries", "cFTgQnvX3DwLJk6uzOd4")}
+          state01={currentRef}
           state02={currentPortrait}
         />
       ) : null}

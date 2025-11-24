@@ -1,5 +1,6 @@
 import { updateDoc } from "firebase/firestore";
 import { useState } from "react";
+import "./AddCommentModal.scss";
 
 const AddCommentModal = (props) => {
     const entryKey = props.state02.entryKey;
