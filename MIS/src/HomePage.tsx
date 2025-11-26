@@ -2,6 +2,7 @@ import HeadStrip from './components/HeadStrip';
 import Menu from './components/Menu';
 import Carousel from "./components/Carousel";
 import NovelSection from "./components/NovelSection.tsx";
+import FooterSection from "./components/FooterSection.tsx";
 import "./HomePage.scss"
 import { Link } from 'react-router';
 
@@ -43,22 +44,7 @@ function HomePage() {
           </div>
         </div>
         <NovelSection />
-        <footer>
-          <ul>
-            <li>
-              email address: florianmusial86@gmail.com
-            </li>
-            <li>
-              facebook profile: ........................
-            </li>
-            <li>
-              This page URL: ..........................
-            </li>
-          </ul>
-          <p className='footer_signature'>
-            Florian Musiał 2025
-          </p>
-        </footer>
+        <FooterSection />
       </section>
     </>
   )

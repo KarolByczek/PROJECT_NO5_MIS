@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { UniformismDb } from "../../AUXILIARY_OBJECTS/UniformismDB";
 import AddCommentModal from "../components/AddCommentModal";
+import FooterSection from "../components/FooterSection";
 import "./SubPageStyle.scss"
 
 const UniformismPage = () => {
@@ -200,7 +201,7 @@ const UniformismPage = () => {
           state02={currentPortrait}
         />
       ) : null}
-
+        <FooterSection />
     </>
   )
 }

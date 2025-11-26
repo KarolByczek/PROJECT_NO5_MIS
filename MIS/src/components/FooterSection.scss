@@ -1,0 +1,15 @@
+ .footer_section {
+     background-image: url(src/assets/artwork-7141107_1280.png);
+     background-size: cover;
+     background-position: center;
+     height: 25vh;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-evenly;
+     align-items: center;
+     margin-top: 3rem;
+ }
+
+ .footer_section_signature {
+     text-decoration: underline;
+ }

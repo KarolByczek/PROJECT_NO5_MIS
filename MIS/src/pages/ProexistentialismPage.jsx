@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { ProEgsDb } from "../../AUXILIARY_OBJECTS/ProegsDB";
 import AddCommentModal from "../components/AddCommentModal";
+import FooterSection from "../components/FooterSection";
 import "./SubPageStyle.scss"
 
 const ProegsistentialismPage = () => {
@@ -54,7 +55,7 @@ const ProegsistentialismPage = () => {
     console.log(currentPortrait);
   };
 
- const addCommentToPortrait = (entryKey, newComment) => {
+  const addCommentToPortrait = (entryKey, newComment) => {
     const commentKey = `comment_${newComment.id}`;
 
     setDbdata((prevData) =>
@@ -200,7 +201,7 @@ const ProegsistentialismPage = () => {
           state02={currentPortrait}
         />
       ) : null}
-
+      <FooterSection />
     </>
   )
 }
