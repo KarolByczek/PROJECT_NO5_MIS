@@ -1,5 +1,6 @@
 .entries_section .entry {
     width: 99vw;
+    height: 40rem;
     display: flex;
     flex-direction: row;
     gap: 3rem;
@@ -7,6 +8,11 @@
     border: 0.2rem solid crimson;
 }
 
+.entries_section .entry .image {
+    height: 100%;
+    width: auto;
+    align-self: center;
+}
 
 .entries_section .entry .about {
     display: flex;

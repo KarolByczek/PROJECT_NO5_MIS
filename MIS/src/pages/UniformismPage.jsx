@@ -16,8 +16,8 @@ const UniformismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const styleVertical = { width: "12rem", height: "20rem" };
-  const styleHorizontal = { width: "22rem", height: "15rem" };
+  const styleVertical = { width: "33rem", height: "39rem" };
+  const styleHorizontal = { width: "39rem", height: "33rem" };
 
 
   useEffect(() => {
