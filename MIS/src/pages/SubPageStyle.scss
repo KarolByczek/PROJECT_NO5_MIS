@@ -8,16 +8,24 @@
     border: 0.2rem solid crimson;
 }
 
-.entries_section .entry .image {
+.entries_section .entry .main_chunk {
+    display: flex;
+    flex-direction: row;
+}
+
+.entries_section .entry .main_chunk .image {
     height: 100%;
     width: auto;
     align-self: center;
 }
 
-.entries_section .entry .about {
+.entries_section .entry .main_chunk .about {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: justify;
+    align-self: center;
     width: 33%;
 }
 
@@ -58,15 +66,21 @@
     background-color: aquamarine;
 }
 
+@media (min-width: 720px) and (max-width: 1100px) {
 
-@media (max-width: 720px) {
+    .entries_section .entry {
+        flex-direction: column;
+        height: fit-content;
+    }
 
-
+    .entries_section .entry .main_chunk {
+        display: flex;
+        flex-direction: row ;
+    }
 
 }
 
-@media (max-width: 450px) {
 
+@media (max-width: 720px) {}
 
-
-}
+@media (max-width: 450px) {}

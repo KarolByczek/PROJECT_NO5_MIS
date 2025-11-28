@@ -16,8 +16,8 @@ const UniformismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const styleVertical = { width: "33rem", height: "39rem" };
-  const styleHorizontal = { width: "39rem", height: "33rem" };
+  const styleVertical = { width: "auto", height: "100%" };
+  const styleHorizontal = { width: "auto", height: "80%" };
 
 
   useEffect(() => {
@@ -143,14 +143,16 @@ const UniformismPage = () => {
         {dbdata.map((entry) => {
           return (
             <div className="entry" key={entry.entryKey}>
-              <img className="image" src={entry.entryURL} alt="apicture" style={entry.entry_position === "vertical" ? styleVertical : styleHorizontal} />
-              <div className="about">
-                <p>
-                  <strong>{entry.entry_name}</strong>
-                </p>
-                <p>
-                  {entry.entry_description}
-                </p>
+              <div className="main_chunk">
+                <img className="image" src={entry.entryURL} alt="apicture" style={entry.entry_position === "vertical" ? styleVertical : styleHorizontal} />
+                <div className="about">
+                  <p>
+                    <strong>{entry.entry_name}</strong>
+                  </p>
+                  <p>
+                    {entry.entry_description}
+                  </p>
+                </div>
               </div>
               <div className="comments_box">
                 {[...Object.values(entry.entry_comments)].length > 0 ? <h3>COMMENTS:</h3> : null}
