@@ -74,6 +74,8 @@
     margin-bottom: 2rem;
 }
 
+
+
 @media (max-width: 1200px) {
 
     .entries_section .entry {
@@ -121,6 +123,16 @@
 }
 
 
-@media (max-width: 720px) {}
+@media (max-width: 720px) {
+
+    .entries_section .entry .main_chunk {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+
+
+}
 
 @media (max-width: 450px) {}
