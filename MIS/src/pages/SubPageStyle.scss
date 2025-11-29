@@ -47,6 +47,7 @@
     gap: 1.5rem;
     overflow-y: scroll;
     scrollbar-width: none;
+    padding-top: 1rem;
 }
 
 .entries_section .entry .comments_box .comments .comment {
@@ -93,6 +94,10 @@
     }
 
 
+    .entries_section .entry .comments_box .add_button {
+        position: relative;
+        margin-top: 1rem;
+    }
 
     .entries_section .entry .comments_box .comments .comment {
         display: flex;

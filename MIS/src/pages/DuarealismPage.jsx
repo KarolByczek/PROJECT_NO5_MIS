@@ -18,7 +18,8 @@ const UniformismPage = () => {
   const [editingContent, setEditingContent] = useState("");
   const styleVertical = { width: "auto", height: "100%" };
   const styleHorizontal = { width: "auto", height: "80%" };
-  const someHeight = { height: "40vh" };
+  const someHeight1 = { height: "25vh" };
+  const someHeight2 = { height: "45vh" }
   const noHeight = { height: "0" };
 
 
@@ -56,6 +57,13 @@ const UniformismPage = () => {
     setCurrentPortrait(current_one);
     console.log(currentPortrait);
   };
+
+  const styleAdjuster = (entry) => {
+  const count = Object.values(entry.entry_comments).length;
+  if (count === 0) return noHeight;
+  if (count === 1) return someHeight1;
+  return someHeight2;
+};
 
   const addCommentToPortrait = (entryKey, newComment) => {
     const commentKey = `comment_${newComment.id}`;
@@ -158,7 +166,7 @@ const UniformismPage = () => {
               </div>
               <div className="comments_box">
                 {[...Object.values(entry.entry_comments)].length > 0 ? <h3>COMMENTS:</h3> : null}
-                <div className="comments" style={Object.values(entry.entry_comments).length > 0 ? someHeight : noHeight}>
+                <div className="comments" style={styleAdjuster(entry)}>
                   {Object.values(entry.entry_comments)
                     .sort((a, b) => Number(b.id) - Number(a.id)) // ⬅️ Ascending (newest to oldest)
                     .map((acomment) => {
