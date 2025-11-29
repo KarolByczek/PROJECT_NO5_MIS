@@ -18,6 +18,8 @@ const ProegsistentialismPage = () => {
   const [editingContent, setEditingContent] = useState("");
   const styleVertical = { width: "auto", height: "100%" };
   const styleHorizontal = { width: "auto", height: "80%" };
+  const someHeight = {height: "40vh"};
+  const noHeight = {height: "0"};
 
 
   useEffect(() => {
@@ -143,18 +145,20 @@ const ProegsistentialismPage = () => {
         {dbdata.map((entry) => {
           return (
             <div className="entry" key={entry.entryKey}>
-              <img className="image" src={entry.entryURL} alt="apicture" style={entry.entry_position === "vertical" ? styleVertical : styleHorizontal} />
-              <div className="about">
-                <p>
-                  <strong>{entry.entry_name}</strong>
-                </p>
-                <p>
-                  {entry.entry_description}
-                </p>
+              <div className="main_chunk">
+                <img className="image" src={entry.entryURL} alt="apicture" style={entry.entry_position === "vertical" ? styleVertical : styleHorizontal} />
+                <div className="about">
+                  <p>
+                    <strong>{entry.entry_name}</strong>
+                  </p>
+                  <p>
+                    {entry.entry_description}
+                  </p>
+                </div>
               </div>
               <div className="comments_box">
                 {[...Object.values(entry.entry_comments)].length > 0 ? <h3>COMMENTS:</h3> : null}
-                <div className="comments">
+                <div className="comments" style={Object.values(entry.entry_comments).length > 0 ? someHeight : noHeight}>
                   {Object.values(entry.entry_comments)
                     .sort((a, b) => Number(b.id) - Number(a.id)) // ⬅️ Ascending (newest to oldest)
                     .map((acomment) => {

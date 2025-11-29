@@ -3,7 +3,6 @@
     height: 40rem;
     display: flex;
     flex-direction: row;
-    gap: 3rem;
     margin-top: 2rem;
     border: 0.2rem solid crimson;
 }
@@ -11,6 +10,9 @@
 .entries_section .entry .main_chunk {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    background-color: antiquewhite;
+    width: 70%;
 }
 
 .entries_section .entry .main_chunk .image {
@@ -24,25 +26,31 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: justify;
     align-self: center;
     width: 33%;
+    padding: 0.2rem;
+    text-align: justify;
 }
 
 .entries_section .entry .comments_box {
-    width: 33%;
+    width: 30%;
+    height: 100%;
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .entries_section .entry .comments_box .comments {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    height: 60vh;
     overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 .entries_section .entry .comments_box .comments .comment {
-    background-color: cadetblue;
+    background-color: rgb(53, 135, 138);
     padding: 1rem;
 }
 
@@ -59,24 +67,51 @@
 }
 
 .entries_section .entry .comments_box .add_button {
-    display: flex;
-    flex-direction: row;
-    justify-self: center;
+
     margin-top: 2rem;
     background-color: aquamarine;
+    margin-bottom: 2rem;
 }
 
-@media (min-width: 720px) and (max-width: 1100px) {
+@media (max-width: 1200px) {
 
     .entries_section .entry {
         flex-direction: column;
         height: fit-content;
+        width: 98vw;
     }
 
     .entries_section .entry .main_chunk {
         display: flex;
-        flex-direction: row ;
+        flex-direction: row;
+        width: 100%;
+        height: 80vh;
     }
+
+    .entries_section .entry .comments_box {
+        width: 100%;
+    }
+
+
+
+    .entries_section .entry .comments_box .comments .comment {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .entries_section .entry .comments_box .comments .comment .content {
+        margin: 0;
+    }
+
+    .entries_section .entry .comments_box .comments .comment .signature {
+        margin: 0;
+    }
+
+    .entries_section .entry .comments_box .comments .comment .date {
+        margin: 0;
+    }
+
 
 }
 

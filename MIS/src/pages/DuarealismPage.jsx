@@ -18,6 +18,8 @@ const UniformismPage = () => {
   const [editingContent, setEditingContent] = useState("");
   const styleVertical = { width: "auto", height: "100%" };
   const styleHorizontal = { width: "auto", height: "80%" };
+  const someHeight = { height: "40vh" };
+  const noHeight = { height: "0" };
 
 
   useEffect(() => {
@@ -156,7 +158,7 @@ const UniformismPage = () => {
               </div>
               <div className="comments_box">
                 {[...Object.values(entry.entry_comments)].length > 0 ? <h3>COMMENTS:</h3> : null}
-                <div className="comments">
+                <div className="comments" style={Object.values(entry.entry_comments).length > 0 ? someHeight : noHeight}>
                   {Object.values(entry.entry_comments)
                     .sort((a, b) => Number(b.id) - Number(a.id)) // ⬅️ Ascending (newest to oldest)
                     .map((acomment) => {
