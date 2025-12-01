@@ -16,10 +16,9 @@ const UniformismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const styleVertical = { width: "auto", height: "100%" };
-  const styleHorizontal = { width: "auto", height: "80%" };
   const someHeight1 = { height: "25vh" };
-  const someHeight2 = { height: "45vh" }
+  const someHeight2 = { height: "35vh" }
+  const someHeight3 = {height: "80vh"};
   const noHeight = { height: "0" };
 
 
@@ -59,11 +58,12 @@ const UniformismPage = () => {
   };
 
   const styleAdjuster = (entry) => {
-  const count = Object.values(entry.entry_comments).length;
-  if (count === 0) return noHeight;
-  if (count === 1) return someHeight1;
-  return someHeight2;
-};
+    const count = Object.values(entry.entry_comments).length;
+    if (count === 0) return noHeight;
+    if (count === 1 && screenX > 1200) return someHeight1;
+    if (screenX < 1200) return someHeight3;
+    return someHeight2;
+  };
 
   const addCommentToPortrait = (entryKey, newComment) => {
     const commentKey = `comment_${newComment.id}`;
@@ -154,7 +154,9 @@ const UniformismPage = () => {
           return (
             <div className="entry" key={entry.entryKey}>
               <div className="main_chunk">
-                <img className="image" src={entry.entryURL} alt="apicture" style={entry.entry_position === "vertical" ? styleVertical : styleHorizontal} />
+                <div className="image_box">
+                  <img className={entry.entry_position === "vertical" ? "image_vertical" : "image_horizontal"} src={entry.entryURL} alt="apicture" />
+                </div>
                 <div className="about">
                   <p>
                     <strong>{entry.entry_name}</strong>
