@@ -17,7 +17,7 @@ const ProegsistentialismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingContent, setEditingContent] = useState("");
   const someHeight1 = { height: "25vh" };
-  const someHeight2 = { height: "45vh" }
+  const someHeight2 = { height: "38vh" }
   const noHeight = { height: "0" };
 
 
@@ -153,7 +153,7 @@ const ProegsistentialismPage = () => {
             <div className="entry" key={entry.entryKey}>
               <div className="main_chunk">
                 <div className="image_box">
-                  <img className="image" src={entry.entryURL} alt="apicture" />
+                  <img className={entry.entry_position === "vertical" ? "image_vertical" : "image_horizontal"} src={entry.entryURL} alt="apicture" />
                 </div>
                 <div className="about">
                   <p>
