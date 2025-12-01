@@ -16,8 +16,8 @@ const ProegsistentialismPage = () => {
   const [currentRef, setCurrentRef] = useState(null);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const styleVertical = { width: "auto", height: "100%" };
-  const styleHorizontal = { width: "auto", height: "80%" };
+  const styleVertical = { maxHeight: "100%" };
+  const styleHorizontal = { maxWidth: "100%" };
   const someHeight1 = { height: "25vh" };
   const someHeight2 = { height: "45vh" }
   const noHeight = { height: "0" };

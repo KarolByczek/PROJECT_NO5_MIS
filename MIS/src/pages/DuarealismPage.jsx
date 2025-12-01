@@ -16,8 +16,8 @@ const UniformismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const styleVertical = { width: "auto", height: "100%" };
-  const styleHorizontal = { width: "auto", height: "80%" };
+  const styleVertical = { maxHeight: "100%" };
+  const styleHorizontal = { maxWidth: "100%" };
   const someHeight1 = { height: "25vh" };
   const someHeight2 = { height: "45vh" }
   const noHeight = { height: "0" };
@@ -59,11 +59,11 @@ const UniformismPage = () => {
   };
 
   const styleAdjuster = (entry) => {
-  const count = Object.values(entry.entry_comments).length;
-  if (count === 0) return noHeight;
-  if (count === 1) return someHeight1;
-  return someHeight2;
-};
+    const count = Object.values(entry.entry_comments).length;
+    if (count === 0) return noHeight;
+    if (count === 1) return someHeight1;
+    return someHeight2;
+  };
 
   const addCommentToPortrait = (entryKey, newComment) => {
     const commentKey = `comment_${newComment.id}`;
@@ -154,7 +154,15 @@ const UniformismPage = () => {
           return (
             <div className="entry" key={entry.entryKey}>
               <div className="main_chunk">
-                <img className="image" src={entry.entryURL} alt="apicture" style={entry.entry_position === "vertical" ? styleVertical : styleHorizontal} />
+                <div className={`image-wrapper ${entry.entry_position === "horizontal" ? "full-bleed" : ""}`}>
+                  <img
+                    className="image"
+                    src={entry.entryURL}
+                    alt="apicture"
+                    data-orientation={entry.entry_position}
+                    style={entry.entry_position === "vertical" ? styleVertical : styleHorizontal}
+                  />
+                </div>
                 <div className="about">
                   <p>
                     <strong>{entry.entry_name}</strong>

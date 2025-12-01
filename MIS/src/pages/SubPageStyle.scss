@@ -1,53 +1,56 @@
 .entries_section .entry {
     width: 99vw;
-    height: 40rem;
+    height: auto;        /* ← LET THE ENTRY GROW TO FIT ITS CONTENT */
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
     border: 0.2rem solid crimson;
+    align-items: flex-start; /* recommended for consistency */
 }
 
 .entries_section .entry .main_chunk {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: center;
     background-color: antiquewhite;
     width: 70%;
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .entries_section .entry .main_chunk .image {
-    height: 100%;
-    width: auto;
-    align-self: center;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;     // ← maintain aspect ratio
+    flex-shrink: 0;
+    aspect-ratio: 65 / 55;   // ← enforces the required proportions
 }
 
 .entries_section .entry .main_chunk .about {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
     width: 33%;
-    padding: 0.2rem;
+    min-width: 250px;
+    max-width: 40%;
+    overflow-wrap: break-word;
     text-align: justify;
 }
 
 .entries_section .entry .comments_box {
-    width: 30%;
+ width: 30%;
     height: 100%;
     background-color: bisque;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;  // ← IMPORTANT
+    padding: 1rem 0;              // ← provides space
 }
 
 .entries_section .entry .comments_box .comments {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    padding-top: 1rem;
+    flex-grow: 1;                 // ← COMMENTS FILL AVAILABLE SPACE
+    margin-bottom: 1rem;          // ← rigid spacing before the button
+    gap: 1rem;
 }
 
 .entries_section .entry .comments_box .comments .comment {
@@ -69,9 +72,9 @@
 
 .entries_section .entry .comments_box .add_button {
 
-    margin-top: 2rem;
     background-color: aquamarine;
-    margin-bottom: 2rem;
+    margin: 0 auto;               // keep centered if you want it centered horizontally
+    width: fit-content;           // not required but nice
 }
 
 
@@ -85,10 +88,21 @@
     }
 
     .entries_section .entry .main_chunk {
-        display: flex;
         flex-direction: row;
         width: 100%;
-        height: 80vh;
+        height: auto;            // ← IMPORTANT: no fixed height
+        align-items: center;     // centers both blocks
+    }
+
+        .entries_section .entry .main_chunk .image {
+        max-width: 60%;          // ← shares space
+        max-height: 50vh;
+        flex-shrink: 1;          // ← allow it to shrink instead of pushing text
+    }
+
+        .entries_section .entry .main_chunk .about {
+        width: 40%;              // ← flexible, no overflow
+        min-width: 250px;        // prevent collapse
     }
 
     .entries_section .entry .comments_box {
@@ -123,16 +137,68 @@
 }
 
 
-@media (max-width: 720px) {
+@media (max-width: 800px) {
 
-    .entries_section .entry .main_chunk {
-        display: flex;
-        flex-direction: column;
-    }
+  /* Column layout preserved */
+  .entries_section .entry .main_chunk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    gap: 1rem;
+  }
 
+  /* NEW: image wrapper that can be full-bleed while staying in flow */
+  .entries_section .entry .main_chunk .image-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    overflow: visible; /* wrapper stays in flow so container height follows image */
+  }
 
+  /* Technique for "visual full-bleed" while preserving flow.
+     The wrapper expands to viewport width and is centered using left/transform trick.
+     Because the wrapper is in normal flow, its height contributes to parent .entry height — no overflow outside the red border. */
+  .entries_section .entry .main_chunk .image-wrapper.full-bleed {
+    /* make wrapper span the entire viewport, but remain in flow */
+    width: 100%;
+    margin-left: calc((100% - 100vw) / 2);
+    margin-right: calc((100% - 100vw) / 2);
+    overflow: hidden;
+  }
 
+  /* The img itself stays simple and predictable */
+  .entries_section .entry .main_chunk .image {
+    display: block;
+    width: 100%;
+    height: auto;                  /* preserve aspect ratio */
+    object-fit: contain;           /* avoid cropping important parts */
+    aspect-ratio: 65 / 55;         /* keep the ratio */
+    max-width: 100vw;
+    /* cap height so extremely wide images don't create huge vertical overflow on very small screens */
+    max-height: 75vh;              /* tweakable: prevents image from being taller than viewport */
+    margin-top: 2rem;
+  }
 
+  /* If you truly want horizontal images to be more "impactful", allow cover inside the wrapper.
+     This is optional — if you prefer the whole image visible use contain (above). */
+  .entries_section .entry .main_chunk .image-wrapper.full-bleed .image[data-orientation="horizontal"] {
+    object-fit: cover;  /* covers the full width while keeping ratio — but crops some vertical parts */
+    height: auto;
+    max-height: 75vh;
+  }
+
+  /* about text under the image */
+  .entries_section .entry .main_chunk .about {
+    width: 100%;
+    max-width: 720px;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    text-align: justify;
+  }
 }
 
 @media (max-width: 450px) {}
