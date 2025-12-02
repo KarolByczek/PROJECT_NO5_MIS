@@ -16,9 +16,8 @@ const UniformismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const someHeight1 = { height: "25vh" };
-  const someHeight2 = { height: "35vh" }
-  const someHeight3 = {height: "80vh"};
+  const someHeight1 = { height: "27vh" };
+  const someHeight2 = { height: "38vh" }
   const noHeight = { height: "0" };
 
 
@@ -60,8 +59,7 @@ const UniformismPage = () => {
   const styleAdjuster = (entry) => {
     const count = Object.values(entry.entry_comments).length;
     if (count === 0) return noHeight;
-    if (count === 1 && screenX > 1200) return someHeight1;
-    if (screenX < 1200) return someHeight3;
+    if (count === 1) return someHeight1;
     return someHeight2;
   };
 

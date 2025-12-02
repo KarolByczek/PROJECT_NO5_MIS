@@ -16,7 +16,7 @@ const UniformismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const someHeight1 = { height: "25vh" };
+  const someHeight1 = { height: "27vh" };
   const someHeight2 = { height: "38vh" }
   const noHeight = { height: "0" };
 
