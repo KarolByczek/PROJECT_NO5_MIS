@@ -1,5 +1,11 @@
+.entries_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .entries_section .entry {
-    width: 99vw;
+    width: 98.5vw;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -97,11 +103,24 @@
 
 .entries_section .entry .comments_box .add_button {
     margin-top: 2rem;
-    background-color: aquamarine;
+    background-color: rgb(52, 212, 159);
     margin-bottom: 2rem;
     width: 60%;
+    padding: 1.2rem;
+    font-size: larger;
+    font-weight: 700;
+    border-radius: 2rem;
+    cursor: pointer;
+    border: 2px solid yellowgreen;
 }
 
+.entries_section .entry .comments_box .add_button:hover {
+
+}
+
+.entries_section .entry .comments_box .add_button:active {
+
+}
 
 @media (max-width: 1200px) {
 
@@ -117,10 +136,6 @@
         width: 100%;
     }
 
-    .entries_section .entry .main_chunk .image_box {
-        width: 30rem;
-        height: 30rem;
-    }
 
     .entries_section .entry .main_chunk .about {
         width: 30%;
