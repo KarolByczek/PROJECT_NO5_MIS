@@ -5,13 +5,16 @@ import NovelSection from "./components/NovelSection.tsx";
 import FooterSection from "./components/FooterSection.tsx";
 import "./HomePage.scss"
 import { Link } from 'react-router';
+import { Helmet } from 'react-helmet-async';
 
 
 function HomePage() {
 
   return (
     <>
-      <title>STRONA GŁÓWNA</title>
+      <Helmet>
+        <title>STRONA GŁÓWNA</title>
+      </Helmet>
       <section>
         <HeadStrip />
         <Menu />
