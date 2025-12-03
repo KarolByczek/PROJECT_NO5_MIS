@@ -50,18 +50,31 @@ const ProegsistentialismPage = () => {
   }, [setDbdata]);
 
 
+  const getScrollbarWidth = () =>
+    window.innerWidth - document.documentElement.clientWidth;
+
+  const disableScroll = () => {
+    const scrollBarWidth = getScrollbarWidth();
+
+    document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+
+    // prevent layout shift when scrollbar disappears
+    document.body.style.paddingRight = scrollBarWidth + "px";
+  };
+
   const onClickHandler = (current_one) => {
+    disableScroll();
     setCommentModal(true);
     setCurrentPortrait(current_one);
-    console.log(currentPortrait);
   };
 
   const styleAdjuster = (entry) => {
-  const count = Object.values(entry.entry_comments).length;
-  if (count === 0) return noHeight;
-  if (count === 1) return someHeight1;
-  return someHeight2;
-};
+    const count = Object.values(entry.entry_comments).length;
+    if (count === 0) return noHeight;
+    if (count === 1) return someHeight1;
+    return someHeight2;
+  };
 
   const addCommentToPortrait = (entryKey, newComment) => {
     const commentKey = `comment_${newComment.id}`;
@@ -144,9 +157,16 @@ const ProegsistentialismPage = () => {
       </Helmet>
       <HeadStrip />
       <Menu />
-      <h1>
+      <h1 className="headline">
         PROEGZYSTENCJALIZM
       </h1>
+      <p className="intro">
+        P R O E G Z Y S T E N C J A L I Z M charakteryzuje się niemałą płynnością kolorów. Jest on próbą przełożenia języka
+        światła na język farb. To właśnie światło jest tutaj głównym motywem. To przez nie wyraża się dążenie człowieka
+        do kontaktu (a nawet jedności) z jego żyjącym otoczeniem. Bo to ono zamazuje granicę
+        pomiędzy homo sapiens a całym jego "rodzeństwem", czy to w świecie zwierząt czy roślin.
+        Reszta na temat znaczenia nazwy...
+      </p>
       <div className="entries_section">
         {dbdata.map((entry) => {
           return (
@@ -165,23 +185,26 @@ const ProegsistentialismPage = () => {
                 </div>
               </div>
               <div className="comments_box">
-                {[...Object.values(entry.entry_comments)].length > 0 ? <h3>COMMENTS:</h3> : null}
+                {[...Object.values(entry.entry_comments)].length > 0 ? <h3>KOMENTARZE:</h3> : null}
                 <div className="comments" style={styleAdjuster(entry)}>
                   {Object.values(entry.entry_comments)
                     .sort((a, b) => Number(b.id) - Number(a.id)) // ⬅️ Ascending (newest to oldest)
                     .map((acomment) => {
                       return acomment.id === editingCommentId ? (
-                        <form key={acomment.id} onSubmit={(e) => handleUpdateComment(e, acomment.id, entry.entryKey)}>
+                        <form className="edit_form" key={acomment.id} onSubmit={(e) => handleUpdateComment(e, acomment.id, entry.entryKey)}>
                           <textarea
+                            className="text"
                             autoFocus
                             value={editingContent}
                             onChange={(e) => setEditingContent(e.target.value)}
                             required
                           />
-                          <button type="submit">Save</button>
-                          <button type="button" onClick={() => setEditingCommentId(null)}>
-                            Cancel
-                          </button>
+                          <div className="buttons">
+                            <button className="save_button" type="submit">Zapisz</button>
+                            <button className="cancel_button" type="button" onClick={() => setEditingCommentId(null)}>
+                              Anuluj
+                            </button>
+                          </div>
                         </form>
                       ) : (
                         <div className="comment" key={acomment.id}>
@@ -190,7 +213,7 @@ const ProegsistentialismPage = () => {
                           <small><p className="date">{new Date(Number(acomment.id)).toLocaleString()}</p></small>
                           {userIsAuthor(acomment.signature) && (
                             <button onClick={() => startEditingComment(acomment.id, acomment)}>
-                              Edit
+                              Edytuj
                             </button>
                           )}
                         </div>
@@ -199,7 +222,7 @@ const ProegsistentialismPage = () => {
                   }
                 </div>
                 <button className="add_button" onClick={() => onClickHandler(entry)}>
-                  ADD A COMMENT
+                  DODAJ KOMENTARZ
                 </button>
               </div>
             </div>)

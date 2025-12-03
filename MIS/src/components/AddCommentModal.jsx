@@ -20,8 +20,16 @@ const AddCommentModal = (props) => {
         };
     }
 
+    const enableScroll = () => {
+        document.body.style.overflow = "";
+        document.body.style.touchAction = "";
+        document.body.style.paddingRight = "";
+    };
+
     const handleAddComment = async (event) => {
         event.preventDefault();
+        enableScroll();
+        window.scroll(false);
         setLoading(true);
 
         const form = event.target;
@@ -52,6 +60,11 @@ const AddCommentModal = (props) => {
         }
     };
 
+    const handleCancel = () => {
+        props.setter01(false);
+        enableScroll();
+    }
+
     return (
         <div id='add_comment_modal'>
             {success ? (
@@ -62,11 +75,11 @@ const AddCommentModal = (props) => {
                 <>
                     <form className="add_employee_form" onSubmit={handleAddComment}>
                         <label htmlFor="the_content">
-                            Your Comment
+                            Your Comment:
                             <textarea name='the_content' required />
                         </label>
                         <label htmlFor="the_signature">
-                            Your Signature
+                            Your Signature:
                             <input
                                 name='the_signature'
                                 type="text"
@@ -76,11 +89,11 @@ const AddCommentModal = (props) => {
                             />
                         </label>
                         <button type="submit" disabled={loading}>
-                            {loading ? "Submitting..." : "SUBMIT"}
+                            {loading ? "DODAWANIE..." : "DODAJ"}
                         </button>
                     </form>
-                    <button onClick={() => props.setter01(false)}>
-                        IF YOU'D RATHER KEEP IT TO YOURSELF, THIS IS THE CHANCE
+                    <button onClick={() => handleCancel()}>
+                        ALBO NIE WYSILAJ SIĘ :)
                     </button>
                 </>
             )}

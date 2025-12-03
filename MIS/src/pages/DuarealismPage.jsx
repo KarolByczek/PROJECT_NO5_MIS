@@ -49,11 +49,23 @@ const UniformismPage = () => {
     fetchData();
   }, [setDbdata]);
 
+  const getScrollbarWidth = () =>
+    window.innerWidth - document.documentElement.clientWidth;
+
+  const disableScroll = () => {
+    const scrollBarWidth = getScrollbarWidth();
+
+    document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+
+    // prevent layout shift when scrollbar disappears
+    document.body.style.paddingRight = scrollBarWidth + "px";
+  };
 
   const onClickHandler = (current_one) => {
+    disableScroll();
     setCommentModal(true);
     setCurrentPortrait(current_one);
-    console.log(currentPortrait);
   };
 
   const styleAdjuster = (entry) => {
@@ -144,9 +156,15 @@ const UniformismPage = () => {
       </Helmet>
       <HeadStrip />
       <Menu />
-      <h1>
+      <h1 className="headline">
         DUAREALIZM
       </h1>
+      <p className="intro">
+        D U A R E A L I Z M to dosyć prostolinijne w swoim stylu malarstwo. Odcienie tutaj nie zlewają się ze sobą,
+        a wręcz - można powiedzieć - gryzą się. W konsekwencji daje to efekt wyrazistości, bijącego po oczach kontrastu barw.
+        Tematyką zawsze jest natura i człowiek, który nieświadomie znajduje swoje odbicie w otaczającym go świecie przyrody.
+        Reszta na temat znaczenia samej nazwy...
+      </p>
       <div className="entries_section">
         {dbdata.map((entry) => {
           return (
@@ -165,23 +183,26 @@ const UniformismPage = () => {
                 </div>
               </div>
               <div className="comments_box">
-                {[...Object.values(entry.entry_comments)].length > 0 ? <h3>COMMENTS:</h3> : null}
+                {[...Object.values(entry.entry_comments)].length > 0 ? <h3>KOMENTARZE:</h3> : null}
                 <div className="comments" style={styleAdjuster(entry)}>
                   {Object.values(entry.entry_comments)
                     .sort((a, b) => Number(b.id) - Number(a.id)) // ⬅️ Ascending (newest to oldest)
                     .map((acomment) => {
                       return acomment.id === editingCommentId ? (
-                        <form key={acomment.id} onSubmit={(e) => handleUpdateComment(e, acomment.id, entry.entryKey)}>
+                        <form className="edit_form" key={acomment.id} onSubmit={(e) => handleUpdateComment(e, acomment.id, entry.entryKey)}>
                           <textarea
+                            className="text"
                             autoFocus
                             value={editingContent}
                             onChange={(e) => setEditingContent(e.target.value)}
                             required
                           />
-                          <button type="submit">Save</button>
-                          <button type="button" onClick={() => setEditingCommentId(null)}>
-                            Cancel
-                          </button>
+                          <div className="buttons">
+                            <button className="save_button" type="submit">Save</button>
+                            <button className="cancel_button" type="button" onClick={() => setEditingCommentId(null)}>
+                              Anuluj
+                            </button>
+                          </div>
                         </form>
                       ) : (
                         <div className="comment" key={acomment.id}>
@@ -190,7 +211,7 @@ const UniformismPage = () => {
                           <small><p className="date">{new Date(Number(acomment.id)).toLocaleString()}</p></small>
                           {userIsAuthor(acomment.signature) && (
                             <button onClick={() => startEditingComment(acomment.id, acomment)}>
-                              Edit
+                              Edytuj
                             </button>
                           )}
                         </div>
@@ -199,7 +220,7 @@ const UniformismPage = () => {
                   }
                 </div>
                 <button className="add_button" onClick={() => onClickHandler(entry)}>
-                  ADD A COMMENT
+                  DODAJ KOMENTARZ
                 </button>
               </div>
             </div>)
