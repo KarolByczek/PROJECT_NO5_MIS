@@ -95,6 +95,7 @@ const AddCommentModal = (props) => {
                     <button onClick={() => handleCancel()}>
                         ALBO NIE WYSILAJ SIĘ :)
                     </button>
+                    <img src={props.state02.entryURL} alt="...." />
                 </>
             )}
         </div>
