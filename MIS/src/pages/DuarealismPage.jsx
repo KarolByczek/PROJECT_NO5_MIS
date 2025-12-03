@@ -198,7 +198,7 @@ const UniformismPage = () => {
                             required
                           />
                           <div className="buttons">
-                            <button className="save_button" type="submit">Save</button>
+                            <button className="save_button" type="submit">Zapisz</button>
                             <button className="cancel_button" type="button" onClick={() => setEditingCommentId(null)}>
                               Anuluj
                             </button>
