@@ -16,8 +16,8 @@ const UniformismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const someHeight1 = { height: "27vh" };
-  const someHeight2 = { height: "38vh" }
+  const someHeight1 = { height: "14rem" };
+  const someHeight2 = { height: "25rem" }
   const noHeight = { height: "0" };
 
 
@@ -157,11 +157,8 @@ const UniformismPage = () => {
       </Helmet>
       <HeadStrip />
       <Menu />
-      <h1 className="headline">
-        UNIFORMIZM
-      </h1>
       <p className="intro">
-        U N I F O R M I Z M komentuje konkretnego rodzaju zachowania społecznych, jakich, delikatnie mówiąc,
+        <strong>U N I F O R M I Z M</strong> komentuje konkretnego rodzaju zachowania społeczne, jakich, delikatnie mówiąc,
         nie brakuje we współczesnym świecie. Stąd przewijającymi się na obrazach postaciami będą bardzo przypominające siebie
         nawzajem manekiny. Bez ubrań, bez wyrazu twarzy, a może nawet - jak to manekiny - bez życia.
         Reszta na temat znaczenia nazwy.

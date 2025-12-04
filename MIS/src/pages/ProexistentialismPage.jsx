@@ -16,8 +16,8 @@ const ProegsistentialismPage = () => {
   const [currentRef, setCurrentRef] = useState(null);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const someHeight1 = { height: "27vh" };
-  const someHeight2 = { height: "38vh" }
+  const someHeight1 = { height: "14rem" };
+  const someHeight2 = { height: "25rem" }
   const noHeight = { height: "0" };
 
 
@@ -157,11 +157,8 @@ const ProegsistentialismPage = () => {
       </Helmet>
       <HeadStrip />
       <Menu />
-      <h1 className="headline">
-        PROEGZYSTENCJALIZM
-      </h1>
       <p className="intro">
-        P R O E G Z Y S T E N C J A L I Z M charakteryzuje się niemałą płynnością kolorów. Jest on próbą przełożenia języka
+        <strong>P R O E G Z Y S T E N C J A L I Z M</strong> charakteryzuje się niemałą płynnością kolorów. Jest on próbą przełożenia języka
         światła na język farb. To właśnie światło jest tutaj głównym motywem. To przez nie wyraża się dążenie człowieka
         do kontaktu (a nawet jedności) z jego żyjącym otoczeniem. Bo to ono zamazuje granicę
         pomiędzy homo sapiens a całym jego "rodzeństwem", czy to w świecie zwierząt czy roślin.

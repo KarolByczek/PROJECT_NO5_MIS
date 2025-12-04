@@ -69,33 +69,35 @@ const AddCommentModal = (props) => {
         <div id='add_comment_modal'>
             {success ? (
                 <div className="success-message">
-                    ✅ Comment submitted!
+                    ✅ KOMENTARZ DODANY!
                 </div>
             ) : (
                 <>
                     <form className="add_employee_form" onSubmit={handleAddComment}>
                         <label htmlFor="the_content">
-                            Your Comment:
+                            Twój komentarz:
                             <textarea name='the_content' required />
                         </label>
                         <label htmlFor="the_signature">
-                            Your Signature:
+                            Twój podpis:
                             <input
                                 name='the_signature'
                                 type="text"
                                 required
-                                placeholder="Your name or nickname (maximum 30 characters)"
+                                placeholder="Twoje imię albo pseudonim (max. 30 znaków)"
                                 maxLength={30}
                             />
                         </label>
                         <button type="submit" disabled={loading}>
                             {loading ? "DODAWANIE..." : "DODAJ"}
                         </button>
+                        <button onClick={() => handleCancel()}>
+                            ALBO NIE WYSILAJ SIĘ :)
+                        </button>
                     </form>
-                    <button onClick={() => handleCancel()}>
-                        ALBO NIE WYSILAJ SIĘ :)
-                    </button>
-                    <img src={props.state02.entryURL} alt="...." />
+                    <div className="image_box">
+                        <img className={props.state02.entry_position === "vertical" ? "image_vertical" : "image_horizontal"} src={props.state02.entryURL} alt="...." />
+                    </div>
                 </>
             )}
         </div>

@@ -16,8 +16,8 @@ const UniformismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
-  const someHeight1 = { height: "27vh" };
-  const someHeight2 = { height: "38vh" }
+  const someHeight1 = { height: "14rem" };
+  const someHeight2 = { height: "25rem" }
   const noHeight = { height: "0" };
 
 
@@ -156,11 +156,8 @@ const UniformismPage = () => {
       </Helmet>
       <HeadStrip />
       <Menu />
-      <h1 className="headline">
-        DUAREALIZM
-      </h1>
       <p className="intro">
-        D U A R E A L I Z M to dosyć prostolinijne w swoim stylu malarstwo. Odcienie tutaj nie zlewają się ze sobą,
+       <strong>D U A R E A L I Z M</strong> to dosyć prostolinijne w swoim stylu malarstwo. Odcienie tutaj nie zlewają się ze sobą,
         a wręcz - można powiedzieć - gryzą się. W konsekwencji daje to efekt wyrazistości, bijącego po oczach kontrastu barw.
         Tematyką zawsze jest natura i człowiek, który nieświadomie znajduje swoje odbicie w otaczającym go świecie przyrody.
         Reszta na temat znaczenia samej nazwy...
