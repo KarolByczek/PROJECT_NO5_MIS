@@ -84,7 +84,7 @@ const AddCommentModal = (props) => {
                                 name='the_signature'
                                 type="text"
                                 required
-                                placeholder="Twoje imię albo pseudonim (max. 30 znaków)"
+                                placeholder="Max. 30 znaków"
                                 maxLength={30}
                             />
                         </label>
