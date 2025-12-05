@@ -88,11 +88,11 @@ const AddCommentModal = (props) => {
                                 maxLength={30}
                             />
                         </label>
-                        <button type="submit" disabled={loading}>
+                        <button className="add_button" type="submit" disabled={loading}>
                             {loading ? "DODAWANIE..." : "DODAJ"}
                         </button>
-                        <button onClick={() => handleCancel()}>
-                            ALBO NIE WYSILAJ SIĘ :)
+                        <button className="cancel_button" onClick={() => handleCancel()}>
+                            ALBO ZLITUJ SIĘ :)
                         </button>
                     </form>
                     <div className="image_box">

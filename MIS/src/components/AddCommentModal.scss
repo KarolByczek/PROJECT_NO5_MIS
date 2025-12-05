@@ -46,6 +46,14 @@ textarea {
     text-align: center;
 }
 
+#add_comment_modal form button {
+    padding: 0.4rem;
+    border: 2px solid yellowgreen;
+    border-radius: 0.5rem;
+    background-color: #5bc172;
+    cursor: pointer;
+}
+
 #add_comment_modal .image_box {
     height: 85vh;
     width: 85vh;
@@ -95,10 +103,11 @@ textarea {
     cursor: not-allowed;
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1160px) {
 
     #add_comment_modal {
         flex-direction: column;
+        justify-content: space-evenly;
         align-items: center;
         padding: 0;
         left: 0;
@@ -112,8 +121,8 @@ textarea {
     }
 
     #add_comment_modal .image_box {
-        width: 95vw;
-        height: 95vw;
+        width: 65vh;
+        height: 65vh;
     }
 
     #add_comment_modal form {
@@ -123,19 +132,33 @@ textarea {
 
 @media (max-width: 720px) {
 
-    #add_comment_modal {
-        justify-content: space-evenly;
-    }
 
     #add_comment_modal form label input,
     textarea {
-        width: 12rem;
+        width: 11rem;
+        height: 2rem;
     }
+
+        #add_comment_modal .image_box {
+        width: 97vw;
+        height: 97vw;
+    }
+
+    #add_comment_modal form {
+        gap: 1.2rem;
+    }
+
+}
+
+@media only screen
+    and (min-device-width: 1024px)
+    and (max-device-width: 1024px)
+    and (min-device-height: 600px)
+    and (max-device-height: 600px)
+    and (-webkit-min-device-pixel-ratio: 2) {
 
     #add_comment_modal .image_box {
-        width: 95vw;
-        height: 95vw;
+        width: 75vh;
+        height: 75vh;
     }
-
-
 }
