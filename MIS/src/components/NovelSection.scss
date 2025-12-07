@@ -1,58 +1,91 @@
 .novel_section {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("./../assets/heart-623530_1280.jpg");
+  background-position: center;
+  background-size: contain;
+  margin-top: 3rem;
+  padding-bottom: 7rem;
+  text-align: center;
+
+
+  .description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
+    word-wrap: break-word;
+    padding: 0 1.5rem 6rem 1.5rem;
+  }
+
+
+  .download_link {
+    display: inline-flex;
     align-items: center;
-    background-color: rgb(181, 111, 127);
-    margin-top: 3rem;
-    padding-bottom: 7rem;
-    text-align: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    border: 0.4rem solid black;
+    border-radius: 1rem;
+    background-color: rgb(68, 87, 103);
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+  }
 
+  .download_link:hover {
+    color: crimson;
+  }
 
-    .description {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-align: justify;
-        word-wrap: break-word;
-        padding: 2%;
+  /* The icon itself */
+  .download_link .icon {
+    display: inline-block;
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  /* Wiggle animation on hover */
+  .download_link:hover .icon {
+    animation: wiggle 0.4s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0% {
+      transform: translateY(0);
     }
 
+    25% {
+      transform: translateY(-3px);
+    }
 
-.download_link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-  border: 0.4rem solid black;
-  padding: 0.5rem 1rem;
-  transition: color 0.3s ease;
-}
+    50% {
+      transform: translateY(0);
+    }
 
-.download_link:hover {
-  color: crimson;
-}
+    75% {
+      transform: translateY(3px);
+    }
 
-/* The icon itself */
-.download_link .icon {
-  display: inline-block;
-  font-size: 1.3rem;
-  transition: transform 0.2s ease;
-}
+    100% {
+      transform: translateY(0);
+    }
+  }
 
-/* Wiggle animation on hover */
-.download_link:hover .icon {
-  animation: wiggle 0.4s ease-in-out infinite;
-}
+  @media (max-width: 450px) {
+    .download_link {
+      color: red;
+    }
 
-@keyframes wiggle {
-  0%   { transform: translateY(0); }
-  25%  { transform: translateY(-3px); }
-  50%  { transform: translateY(0); }
-  75%  { transform: translateY(3px); }
-  100% { transform: translateY(0); }
-}
+    .download_link .icon {
+      animation: wiggle 0.4s ease-in-out infinite;
+      font-size: 2rem;
+      display: inline-block;
+    }
+
+  }
 
 }
