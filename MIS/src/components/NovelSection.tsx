@@ -5,8 +5,7 @@ import { doc, updateDoc, increment } from "firebase/firestore";
 
 const NovelSection: React.FC = () => {
 
-  const handleDownload01 = async (event:any) => {
-    event.preventDefault();
+  const handleDownload01 = async () => {
     const counterRef = doc(counter01Db, "PortraitData", "NsXOGRWHw71ZuLGxy2BQ");
 
     try {

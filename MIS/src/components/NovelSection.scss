@@ -10,6 +10,7 @@
   margin-top: 3rem;
   padding-bottom: 7rem;
   text-align: center;
+  color: #c7bebe;
 
 
   .description {
@@ -18,8 +19,8 @@
     text-align: justify;
     word-wrap: break-word;
     padding: 0 1.5rem 6rem 1.5rem;
+    
   }
-
 
   .download_link {
     display: inline-flex;
@@ -28,15 +29,21 @@
     font-weight: bold;
     text-decoration: none;
     color: black;
-    border: 0.4rem solid black;
+    border: 0.4rem solid rgb(9, 46, 99);
     border-radius: 1rem;
-    background-color: rgb(68, 87, 103);
-    padding: 0.5rem 1rem;
+    background-color: rgb(70, 150, 214);
+    padding: 0.5rem;
     transition: color 0.3s ease;
   }
 
   .download_link:hover {
-    color: crimson;
+    color: rgb(101, 250, 217);
+  }
+
+  .download_link:active {
+    color: #0c0707;
+    background-color: #c7bebe;
+    border-color: #c7bebe;
   }
 
   /* The icon itself */
@@ -77,13 +84,17 @@
 
   @media (max-width: 450px) {
     .download_link {
-      color: red;
+      color: rgb(101, 250, 217);
+      padding: 0.6rem;
+      font-size: 1.5rem;
+      width: 90%;
     }
 
     .download_link .icon {
       animation: wiggle 0.4s ease-in-out infinite;
       font-size: 2rem;
       display: inline-block;
+      font-size: 190%;
     }
 
   }
