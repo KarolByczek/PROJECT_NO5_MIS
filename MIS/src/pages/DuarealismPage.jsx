@@ -6,6 +6,7 @@ import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { DuarealismDb } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import AddCommentModal from "../components/AddCommentModal";
 import FooterSection from "../components/FooterSection";
+import { getAuth } from "firebase/auth";
 import "./SubPageStyle.scss"
 
 const UniformismPage = () => {
@@ -141,13 +142,11 @@ const UniformismPage = () => {
     setEditingCommentId(commentId);
     setEditingContent(comment.content);
   };
+ 
+  const auth = getAuth();
 
-  const userSignature = localStorage.getItem("signature"); // or however you're tracking it
-
-  const userIsAuthor = (signature) => {
-    return signature === userSignature;
-  };
-
+  const userIsAuthor = (comment) =>
+    comment.authorId === auth.currentUser?.uid;
 
   return (
     <>
@@ -157,7 +156,7 @@ const UniformismPage = () => {
       <HeadStrip />
       <Menu />
       <p className="intro">
-       <strong>D U A R E A L I Z M</strong> to dosyć prostolinijne w swoim stylu malarstwo. Odcienie tutaj nie zlewają się ze sobą,
+        <strong>D U A R E A L I Z M</strong> to dosyć prostolinijne w swoim stylu malarstwo. Odcienie tutaj nie zlewają się ze sobą,
         a wręcz - można powiedzieć - gryzą się. W konsekwencji daje to efekt wyrazistości, bijącego po oczach kontrastu barw.
         Tematyką zawsze jest natura i człowiek, który nieświadomie znajduje swoje odbicie w otaczającym go świecie przyrody.
         Reszta na temat znaczenia samej nazwy...
