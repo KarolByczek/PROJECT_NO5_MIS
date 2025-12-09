@@ -130,23 +130,7 @@ const DuarealismPage = () => {
                   {Object.values(entry.entry_comments)
                     .sort((a, b) => Number(b.id) - Number(a.id)) // ⬅️ Ascending (newest to oldest)
                     .map((acomment) => {
-                      return acomment.id === editingCommentId ? (
-                        <form className="edit_form" key={acomment.id} onSubmit={(e) => handleUpdateComment(e, acomment.id, entry.entryKey)}>
-                          <textarea
-                            className="text"
-                            autoFocus
-                            value={editingContent}
-                            onChange={(e) => setEditingContent(e.target.value)}
-                            required
-                          />
-                          <div className="buttons">
-                            <button className="save_button" type="submit">Zapisz</button>
-                            <button className="cancel_button" type="button" onClick={() => setEditingCommentId(null)}>
-                              Anuluj
-                            </button>
-                          </div>
-                        </form>
-                      ) : (
+                      return (
                         <div className="comment" key={acomment.id}>
                           <strong><p className="content">{acomment.content}</p></strong>
                           <i><p className="signature">-{acomment.signature}</p></i>
