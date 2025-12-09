@@ -6,10 +6,10 @@ import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { DuarealismDb } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import AddCommentModal from "../components/AddCommentModal";
 import FooterSection from "../components/FooterSection";
-import { getAuth } from "firebase/auth";
+import { auth } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import "./SubPageStyle.scss"
 
-const UniformismPage = () => {
+const DuarealismPage = () => {
 
   const [dbdata, setDbdata] = useState([]);
   const [commentmodal, setCommentModal] = useState(false);
@@ -17,6 +17,7 @@ const UniformismPage = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
   const [editingContent, setEditingContent] = useState("");
+  const [ready, setReady] = useState(false);
   const someHeight1 = { height: "14rem" };
   const someHeight2 = { height: "25rem" }
   const noHeight = { height: "0" };
@@ -50,6 +51,16 @@ const UniformismPage = () => {
     fetchData();
   }, [setDbdata]);
 
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (user) setReady(true);
+    });
+    return () => unsub();
+  }, []);
+
+  if (!ready) return <div>Ładowanie…</div>;
+
+
   const getScrollbarWidth = () =>
     window.innerWidth - document.documentElement.clientWidth;
 
@@ -76,7 +87,7 @@ const UniformismPage = () => {
     return someHeight2;
   };
 
-  const addCommentToPortrait = (entryKey, newComment) => {
+  const addCommentToEntry = (entryKey, newComment) => {
     const commentKey = `comment_${newComment.id}`;
 
     setDbdata((prevData) =>
@@ -137,16 +148,6 @@ const UniformismPage = () => {
     }
   };
 
-  const startEditingComment = (commentId, comment) => {
-    console.log("Editing comment:", commentId);
-    setEditingCommentId(commentId);
-    setEditingContent(comment.content);
-  };
- 
-  const auth = getAuth();
-
-  const userIsAuthor = (comment) =>
-    comment.authorId === auth.currentUser?.uid;
 
   return (
     <>
@@ -205,7 +206,7 @@ const UniformismPage = () => {
                           <strong><p className="content">{acomment.content}</p></strong>
                           <i><p className="signature">-{acomment.signature}</p></i>
                           <small><p className="date">{new Date(Number(acomment.id)).toLocaleString()}</p></small>
-                          {userIsAuthor(acomment.signature) && (
+                          {userIsAuthor(acomment) && (
                             <button onClick={() => startEditingComment(acomment.id, acomment)}>
                               Edytuj
                             </button>
@@ -225,7 +226,7 @@ const UniformismPage = () => {
       {commentmodal === true ? (
         <AddCommentModal
           setter01={setCommentModal}
-          setter02={addCommentToPortrait}
+          setter02={addCommentToEntry}
           state01={currentRef}
           state02={currentPortrait}
         />
@@ -235,4 +236,4 @@ const UniformismPage = () => {
   )
 }
 
-export default UniformismPage;
+export default DuarealismPage;

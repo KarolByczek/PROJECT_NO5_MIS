@@ -1,6 +1,7 @@
 import { updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
+import { auth } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import "./AddCommentModal.scss";
 
 const AddCommentModal = (props) => {
@@ -19,7 +20,7 @@ const AddCommentModal = (props) => {
             id: Date.now().toString(),
             content: formdata.get("the_content"),
             signature: formdata.get("the_signature"),
-            authorId: auth.currentUser.uid   // <-- IMPORTANT
+            authorId: auth.currentUser?.uid || "unknown"
         };
     }
 

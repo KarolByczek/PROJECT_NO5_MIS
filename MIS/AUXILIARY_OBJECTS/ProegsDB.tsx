@@ -11,7 +11,6 @@ const ProEgFirebaseConfig = {
   measurementId: "G-W4TTZVMRYJ"
 };
 
-// Initialize the second Firebase app with a custom name
 const ProEgsApp = getApps().find(app => app.name === "ProEgConf")
   ? getApp("ProEgConf")
   : initializeApp(ProEgFirebaseConfig, "ProEgConf");
