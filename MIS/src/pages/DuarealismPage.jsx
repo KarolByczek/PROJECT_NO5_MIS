@@ -6,7 +6,6 @@ import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { DuarealismDb } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import AddCommentModal from "../components/AddCommentModal";
 import FooterSection from "../components/FooterSection";
-import { auth } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import "./SubPageStyle.scss"
 
 const DuarealismPage = () => {
@@ -14,10 +13,7 @@ const DuarealismPage = () => {
   const [dbdata, setDbdata] = useState([]);
   const [commentmodal, setCommentModal] = useState(false);
   const [currentPortrait, setCurrentPortrait] = useState(null);
-  const [editingCommentId, setEditingCommentId] = useState(null);
   const [currentRef, setCurrentRef] = useState(null);
-  const [editingContent, setEditingContent] = useState("");
-  const [ready, setReady] = useState(false);
   const someHeight1 = { height: "14rem" };
   const someHeight2 = { height: "25rem" }
   const noHeight = { height: "0" };
@@ -50,15 +46,6 @@ const DuarealismPage = () => {
 
     fetchData();
   }, [setDbdata]);
-
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) setReady(true);
-    });
-    return () => unsub();
-  }, []);
-
-  if (!ready) return <div>Ładowanie…</div>;
 
 
   const getScrollbarWidth = () =>
@@ -104,48 +91,6 @@ const DuarealismPage = () => {
         return entry;
       })
     );
-  };
-
-  const handleUpdateComment = async (e, commentId, entryKey) => {
-    e.preventDefault();
-
-    const updatedPath = `${entryKey}.entry_comments.comment_${commentId}.content`;
-
-    try {
-      await updateDoc(currentRef, {
-        [updatedPath]: editingContent,
-      });
-
-      setDbdata(prevData =>
-        prevData.map(entry => {
-          if (entry.entryKey === entryKey) {
-            const updatedComments = { ...entry.entry_comments };
-            const commentKey = Object.keys(updatedComments).find(
-              key => updatedComments[key].id === commentId
-            );
-
-            if (commentKey) {
-              updatedComments[commentKey] = {
-                ...updatedComments[commentKey],
-                content: editingContent,
-              };
-            }
-
-            return {
-              ...entry,
-              entry_comments: updatedComments,
-            };
-          }
-          return entry;
-        })
-      );
-
-      setEditingCommentId(null);
-      setEditingContent("");
-
-    } catch (error) {
-      console.error("Failed to update comment: ", error);
-    }
   };
 
 
@@ -206,11 +151,6 @@ const DuarealismPage = () => {
                           <strong><p className="content">{acomment.content}</p></strong>
                           <i><p className="signature">-{acomment.signature}</p></i>
                           <small><p className="date">{new Date(Number(acomment.id)).toLocaleString()}</p></small>
-                          {userIsAuthor(acomment) && (
-                            <button onClick={() => startEditingComment(acomment.id, acomment)}>
-                              Edytuj
-                            </button>
-                          )}
                         </div>
                       )
                     })

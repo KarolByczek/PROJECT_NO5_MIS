@@ -1,7 +1,6 @@
 import { updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
-import { auth } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import "./AddCommentModal.scss";
 
 const AddCommentModal = (props) => {
