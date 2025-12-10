@@ -38,13 +38,13 @@ textarea {
     height: 2.4rem;
 }
 
-#add_comment_modal form label input {
+#add_comment_modal form label input, textarea {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#add_comment_modal form label textarea {
-    text-align: center;
-}
 
 #add_comment_modal form button {
     padding: 0.4rem;
@@ -103,7 +103,7 @@ textarea {
     cursor: not-allowed;
 }
 
-@media (max-width: 1160px) {
+@media (max-width: 1180px) {
 
     #add_comment_modal {
         flex-direction: column;
@@ -128,16 +128,17 @@ textarea {
     }
 }
 
-@media (max-width: 720px) {
-
+@media (max-width: 520px) {
 
     #add_comment_modal form label {
         width: 90vw;
+        font-size: larger;
     }
 
-    #add_comment_modal form label textarea,
-    input {
-        width: 5rem;
+    #add_comment_modal form label
+    input, textarea {
+        width: 45%;
+         height: 4rem;
     }
 
     #add_comment_modal .image_box {

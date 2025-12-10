@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { collection, addDoc, doc, updateDoc, getDoc } from "firebase/firestore";
-import { DuarealismDb } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import "./AddCommentModal.scss";
 
-const AddCommentModal = ({ closeModal, entry, addComment }) => {
+const AddCommentModal = ({ closeModal, entry, addComment, db, collectionName }) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -27,16 +26,11 @@ const AddCommentModal = ({ closeModal, entry, addComment }) => {
 
     try {
       // 1️⃣ Add comment document to Firestore
-      const commentsRef = collection(
-        DuarealismDb,
-        "DuarealismEntries",
-        entry.entryId,
-        "entry_comments"
-      );
+      const commentsRef = collection(db, collectionName, entry.entryId, "entry_comments");
       await addDoc(commentsRef, newComment);
 
       // 2️⃣ Increase comment count in the parent document
-      const parentRef = doc(DuarealismDb, "DuarealismEntries", entry.entryId);
+      const parentRef = doc(db, collectionName, entry.entryId);
       const parentSnap = await getDoc(parentRef);
       const currentCount = parentSnap.data().entry_comments_count || 0;
       await updateDoc(parentRef, {
@@ -44,7 +38,6 @@ const AddCommentModal = ({ closeModal, entry, addComment }) => {
       });
 
       // 3️⃣ Immediately update frontend
-      // ✅ Use entry.entryId (not entryKey) to match main page
       addComment(entry.entryId, newComment, newComment.id);
 
       // 4️⃣ UI feedback

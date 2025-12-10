@@ -2,238 +2,156 @@ import { useEffect, useState } from "react";
 import HeadStrip from "../components/HeadStrip";
 import Menu from "../components/Menu";
 import { Helmet } from "react-helmet-async";
-import { getDoc, updateDoc, doc } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { UniformismDb } from "../../AUXILIARY_OBJECTS/UniformismDB";
 import AddCommentModal from "../components/AddCommentModal";
 import FooterSection from "../components/FooterSection";
-import "./SubPageStyle.scss"
+import "./SubPageStyle.scss";
 
 const UniformismPage = () => {
-
-  const [dbdata, setDbdata] = useState([]);
-  const [commentmodal, setCommentModal] = useState(false);
-  const [currentPortrait, setCurrentPortrait] = useState(null);
-  const [editingCommentId, setEditingCommentId] = useState(null);
-  const [currentRef, setCurrentRef] = useState(null);
-  const [editingContent, setEditingContent] = useState("");
-  const someHeight1 = { height: "14rem" };
-  const someHeight2 = { height: "25rem" }
-  const noHeight = { height: "0" };
-
+  const [entries, setEntries] = useState([]);
+  const [commentModal, setCommentModal] = useState(false);
+  const [currentEntry, setCurrentEntry] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const docRef = doc(UniformismDb, "UniformismEntries", "HcUgEibmxPkwTjQdlCNP");
-        const docSnap = await getDoc(docRef);
+        // 1️⃣ LOAD ALL ENTRY DOCUMENTS
+        const entriesRef = collection(UniformismDb, "UniformismEntries");
+        const entriesSnap = await getDocs(entriesRef);
 
-        if (docSnap.exists()) {
-          const docData = docSnap.data(); // ✅ This is your big object
+        const loadedEntries = [];
 
-          const initArray = [];
-          Object.entries(docData).forEach(([key, value]) => {
-            initArray.push({ ...value, entryKey: key });
+        // 2️⃣ FOR EACH ENTRY → LOAD ITS COMMENTS
+        for (const entryDoc of entriesSnap.docs) {
+          const entryData = entryDoc.data();
+          const entryId = entryDoc.id;
+
+          const commentsRef = collection(
+            UniformismDb,
+            "UniformismEntries",
+            entryId,
+            "entry_comments"
+          );
+
+          const commentsSnap = await getDocs(commentsRef);
+
+          const commentsMap = {};
+          commentsSnap.forEach((c) => {
+            commentsMap[c.id] = c.data();
           });
 
-          setDbdata(initArray);
-          setCurrentRef(docRef);
-          console.log(currentRef);
-        } else {
-          console.error("Document does not exist!");
+          loadedEntries.push({
+            entryId,
+            ...entryData,
+            entry_comments: commentsMap,
+          });
         }
+
+        setEntries(loadedEntries);
       } catch (error) {
-        console.error("Error fetching Firestore data: ", error);
+        console.error("Error loading entries:", error);
       }
     };
 
     fetchData();
-  }, [setDbdata]);
+  }, []);
 
-
-  const getScrollbarWidth = () =>
-    window.innerWidth - document.documentElement.clientWidth;
-
-  const disableScroll = () => {
-    const scrollBarWidth = getScrollbarWidth();
-
-    document.body.style.overflow = "hidden";
-    document.body.style.touchAction = "none";
-
-    // prevent layout shift when scrollbar disappears
-    document.body.style.paddingRight = scrollBarWidth + "px";
-  };
-
-  const onClickHandler = (current_one) => {
-    disableScroll();
-    setCommentModal(true);
-    setCurrentPortrait(current_one);
-  };
-
-  const styleAdjuster = (entry) => {
-    const count = Object.values(entry.entry_comments).length;
-    if (count === 0) return noHeight;
-    if (count === 1) return someHeight1;
-    return someHeight2;
-  };
-
-  const addCommentToPortrait = (entryKey, newComment) => {
-    const commentKey = `comment_${newComment.id}`;
-
-    setDbdata((prevData) =>
-      prevData.map((entry) => {
-        if (entry.entryKey === entryKey) {
-          return {
+  const addCommentToEntry = (entryId, newComment, commentId) => {
+    setEntries((prev) =>
+      prev.map((entry) =>
+        entry.entryId === entryId
+          ? {
             ...entry,
             entry_comments: {
               ...entry.entry_comments,
-              [commentKey]: newComment,
+              [commentId]: newComment,
             },
-          };
-        }
-        return entry;
-      })
+          }
+          : entry
+      )
     );
   };
-
-  const handleUpdateComment = async (e, commentId, entryKey) => {
-    e.preventDefault();
-
-    const updatedPath = `${entryKey}.entry_comments.comment_${commentId}.content`;
-
-    try {
-      await updateDoc(currentRef, {
-        [updatedPath]: editingContent,
-      });
-
-      setDbdata(prevData =>
-        prevData.map(entry => {
-          if (entry.entryKey === entryKey) {
-            const updatedComments = { ...entry.entry_comments };
-            const commentKey = Object.keys(updatedComments).find(
-              key => updatedComments[key].id === commentId
-            );
-
-            if (commentKey) {
-              updatedComments[commentKey] = {
-                ...updatedComments[commentKey],
-                content: editingContent,
-              };
-            }
-
-            return {
-              ...entry,
-              entry_comments: updatedComments,
-            };
-          }
-          return entry;
-        })
-      );
-
-      setEditingCommentId(null);
-      setEditingContent("");
-
-    } catch (error) {
-      console.error("Failed to update comment: ", error);
-    }
-  };
-
-  const startEditingComment = (commentId, comment) => {
-    console.log("Editing comment:", commentId);
-    setEditingCommentId(commentId);
-    setEditingContent(comment.content);
-  };
-
-  const userSignature = localStorage.getItem("signature"); // or however you're tracking it
-
-  const userIsAuthor = (signature) => {
-    return signature === userSignature;
-  };
-
 
   return (
     <>
       <Helmet>
-        <title>UNIFORMIZM</title>
+        <title>DUAREALIZM</title>
       </Helmet>
+
       <HeadStrip />
       <Menu />
-      <p className="intro">
-        <strong>U N I F O R M I Z M</strong> komentuje konkretnego rodzaju zachowania społeczne, jakich, delikatnie mówiąc,
-        nie brakuje we współczesnym świecie. Stąd przewijającymi się na obrazach postaciami będą bardzo przypominające siebie
-        nawzajem manekiny. Bez ubrań, bez wyrazu twarzy, a może nawet - jak to manekiny - bez życia.
-        Reszta na temat znaczenia nazwy.
-      </p>
+
       <div className="entries_section">
-        {dbdata.map((entry) => {
-          return (
-            <div className="entry" key={entry.entryKey}>
-              <div className="main_chunk">
-                <div className="image_box">
-                  <img className={entry.entry_position === "vertical" ? "image_vertical" : "image_horizontal"} src={entry.entryURL} alt="apicture" />
-                </div>                <div className="about">
-                  <p>
-                    <strong>{entry.entry_name}</strong>
-                  </p>
-                  <p>
-                    {entry.entry_description}
-                  </p>
-                </div>
-              </div>
-              <div className="comments_box">
-                {[...Object.values(entry.entry_comments)].length > 0 ? <h3>KOMENTARZE:</h3> : null}
-                <div className="comments" style={styleAdjuster(entry)}>
-                  {Object.values(entry.entry_comments)
-                    .sort((a, b) => Number(b.id) - Number(a.id)) // ⬅️ Ascending (newest to oldest)
-                    .map((acomment) => {
-                      return acomment.id === editingCommentId ? (
-                        <form className="edit_form" key={acomment.id} onSubmit={(e) => handleUpdateComment(e, acomment.id, entry.entryKey)}>
-                          <textarea
-                            className="text"
-                            autoFocus
-                            value={editingContent}
-                            onChange={(e) => setEditingContent(e.target.value)}
-                            required
-                          />
-                          <div className="buttons">
-                            <button className="save_button" type="submit">Zapisz</button>
-                            <button className="cancel_button" type="button" onClick={() => setEditingCommentId(null)}>
-                              Anuluj
-                            </button>
-                          </div>
-                        </form>
-                      ) : (
-                        <div className="comment" key={acomment.id}>
-                          <strong><p className="content">{acomment.content}</p></strong>
-                          <i><p className="signature">-{acomment.signature}</p></i>
-                          <small><p className="date">{new Date(Number(acomment.id)).toLocaleString()}</p></small>
-                          {userIsAuthor(acomment.signature) && (
-                            <button onClick={() => startEditingComment(acomment.id, acomment)}>
-                              Edytuj
-                            </button>
-                          )}
-                        </div>
-                      )
-                    })
+        {entries.map((entry) => (
+          <div className="entry" key={entry.entryId || entry.id}>
+            <div className="main_chunk">
+              <div className="image_box">
+                <img
+                  className={
+                    entry.entry_position === "vertical"
+                      ? "image_vertical"
+                      : "image_horizontal"
                   }
-                </div>
-                <button className="add_button" onClick={() => onClickHandler(entry)}>
-                  DODAJ KOMENTARZ
-                </button>
+                  src={entry.entryURL}
+                  alt={entry.entry_name}
+                />
               </div>
-            </div>)
-        })}
+
+              <div className="about">
+                <p><strong>{entry.entry_name}</strong></p>
+                <p>{entry.entry_description}</p>
+              </div>
+            </div>
+
+            <div className="comments_box">
+              {Object.values(entry.entry_comments).length > 0 && (
+                <h3>KOMENTARZE:</h3>
+              )}
+
+              <div className="comments">
+                {Object.values(entry.entry_comments)
+                  .sort((a, b) => Number(b.id) - Number(a.id))
+                  .map((comment) => (
+                    <div className="comment" key={comment.id}>
+                      <strong><p className="content">{comment.content}</p></strong>
+                      <i><p className="signature">-{comment.signature}</p></i>
+                      <small>
+                        <p className="date">
+                          {new Date(Number(comment.id)).toLocaleString()}
+                        </p>
+                      </small>
+                    </div>
+                  ))}
+              </div>
+
+              <button
+                className="add_button"
+                onClick={() => {
+                  setCurrentEntry(entry);
+                  setCommentModal(true);
+                }}
+              >
+                DODAJ KOMENTARZ
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-      {commentmodal === true ? (
+
+      {commentModal && currentEntry && (
         <AddCommentModal
-          setter01={setCommentModal}
-          setter02={addCommentToPortrait}
-          state01={currentRef}
-          state02={currentPortrait}
+          closeModal={() => setCommentModal(false)}
+          entry={currentEntry}
+          addComment={addCommentToEntry}
+          db={UniformismDb}
+          collectionName="UniformismEntries"
         />
-      ) : null}
+      )}
+
       <FooterSection />
     </>
-  )
-}
+  );
+};
 
 export default UniformismPage;

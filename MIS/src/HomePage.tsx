@@ -18,7 +18,7 @@ function HomePage() {
       <section>
         <HeadStrip />
         <Menu />
-        <h1 className='expo_header'>Dzień dobry, dobry wieczór<span className='ending'>&nbsp;lub dobranoc :) &#128075;</span> </h1>
+        <h1 className='expo_header'>Dzień dobry, dobry wieczór<span className='ending'>&nbsp;lub dobranoc :) &#128075;</span></h1>
         <Carousel />
         <div className='grid_menu_section'>
           <h1>N U R T Y :</h1>

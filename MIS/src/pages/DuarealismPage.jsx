@@ -62,12 +62,12 @@ const DuarealismPage = () => {
       prev.map((entry) =>
         entry.entryId === entryId
           ? {
-              ...entry,
-              entry_comments: {
-                ...entry.entry_comments,
-                [commentId]: newComment,
-              },
-            }
+            ...entry,
+            entry_comments: {
+              ...entry.entry_comments,
+              [commentId]: newComment,
+            },
+          }
           : entry
       )
     );
@@ -84,7 +84,7 @@ const DuarealismPage = () => {
 
       <div className="entries_section">
         {entries.map((entry) => (
-          <div className="entry" key={entry.entryId}>
+          <div className="entry" key={entry.entryId || entry.id}>
             <div className="main_chunk">
               <div className="image_box">
                 <img
@@ -144,6 +144,8 @@ const DuarealismPage = () => {
           closeModal={() => setCommentModal(false)}
           entry={currentEntry}
           addComment={addCommentToEntry}
+          db={DuarealismDb}
+          collectionName="DuarealismEntries"
         />
       )}
 
