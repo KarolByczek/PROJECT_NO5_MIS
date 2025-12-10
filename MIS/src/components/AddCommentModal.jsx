@@ -1,110 +1,99 @@
-import { updateDoc } from "firebase/firestore";
 import { useState } from "react";
-import { getAuth } from "firebase/auth";
+import { collection, addDoc, doc, updateDoc, getDoc } from "firebase/firestore";
+import { DuarealismDb } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import "./AddCommentModal.scss";
 
-const AddCommentModal = (props) => {
-    const entryKey = props.state02.entryKey;
-    const [success, setSuccess] = useState(false);
-    const [loading, setLoading] = useState(false);
+const AddCommentModal = ({ closeModal, addComment }) => {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-    if (!entryKey) {
-        console.error("No portraitKey found in currentEntry");
-        return null;
-    }
+  const enableScroll = () => {
+    document.body.style.overflow = "";
+    document.body.style.touchAction = "";
+  };
 
-    function makeComment(formdata) {
-        const auth = getAuth();
-        return {
-            id: Date.now().toString(),
-            content: formdata.get("the_content"),
-            signature: formdata.get("the_signature"),
-            authorId: auth.currentUser?.uid || "unknown"
-        };
-    }
+  const submitComment = async (event) => {
+    event.preventDefault();
+    setLoading(true);
 
-    const enableScroll = () => {
-        document.body.style.overflow = "";
-        document.body.style.touchAction = "";
-        document.body.style.paddingRight = "";
+    const fd = new FormData(event.target);
+
+    const newComment = {
+      id: Date.now().toString(),
+      content: fd.get("the_content"),
+      signature: fd.get("the_signature"),
     };
 
-    const handleAddComment = async (event) => {
-        event.preventDefault();
+    try {
+      const commentsRef = collection(
+        DuarealismDb,
+        "DuarealismEntries",
+        "DTlwxRdu5sEIGDXvekSP",
+        "entry_comments"
+      );
+
+      const docRef = await addDoc(commentsRef, newComment);
+
+      // Update parent counter (required by Firestore rules)
+      const entryDocRef = doc(DuarealismDb, "DuarealismEntries", "DTlwxRdu5sEIGDXvekSP");
+      const entrySnap = await getDoc(entryDocRef);
+      const currentCount = entrySnap.data().entry_comments_count || 0;
+
+      await updateDoc(entryDocRef, {
+        entry_comments_count: currentCount + 1
+      });
+
+      addComment(newComment, docRef.id);
+
+      setSuccess(true);
+
+      setTimeout(() => {
+        closeModal();
         enableScroll();
-        window.scroll(false);
-        setLoading(true);
+      }, 1500);
 
-        const form = event.target;
-        const specformdata = new FormData(form);
-        const specComment = makeComment(specformdata);
-
-        const CommentRef = props.state01;
-        const commentKey = `comment_${Date.now()}`;
-
-        try {
-            await updateDoc(CommentRef, {
-                [`${entryKey}.entry_comments.${commentKey}`]: specComment
-            });
-
-            props.setter02(entryKey, specComment);
-            console.log("Comment added successfully!");
-            setSuccess(true);
-            form.reset(); // ✅ Clear form after success
-
-            setTimeout(() => {
-                props.setter01(false);
-            }, 2000);
-        } catch (error) {
-            console.error("Error adding comment: ", error);
-        } finally {
-            setLoading(false);
-            localStorage.setItem("signature", specComment.signature);
-        }
-    };
-
-    const handleCancel = () => {
-        props.setter01(false);
-        enableScroll();
+    } catch (error) {
+      console.error("Error adding comment: ", error);
+    } finally {
+      setLoading(false);
+      localStorage.setItem("signature", newComment.signature);
     }
+  };
 
-    return (
-        <div id='add_comment_modal'>
-            {success ? (
-                <div className="success-message">
-                    ✅ KOMENTARZ DODANY!
-                </div>
-            ) : (
-                <>
-                    <form className="add_employee_form" onSubmit={handleAddComment}>
-                        <label htmlFor="the_content">
-                            Twój komentarz:
-                            <textarea name='the_content' required />
-                        </label>
-                        <label htmlFor="the_signature">
-                            Twój podpis:
-                            <input
-                                name='the_signature'
-                                type="text"
-                                required
-                                placeholder="Max. 30 znaków"
-                                maxLength={30}
-                            />
-                        </label>
-                        <button className="add_button" type="submit" disabled={loading}>
-                            {loading ? "DODAWANIE..." : "DODAJ"}
-                        </button>
-                        <button className="cancel_button" onClick={() => handleCancel()}>
-                            ALBO ZLITUJ SIĘ :)
-                        </button>
-                    </form>
-                    <div className="image_box">
-                        <img className={props.state02.entry_position === "vertical" ? "image_vertical" : "image_horizontal"} src={props.state02.entryURL} alt="...." />
-                    </div>
-                </>
-            )}
-        </div>
-    );
+  return (
+    <div id="add_comment_modal">
+      {success ? (
+        <div className="success-message">✅ KOMENTARZ DODANY!</div>
+      ) : (
+        <form className="add_employee_form" onSubmit={submitComment}>
+          <label>
+            Twój komentarz:
+            <textarea name="the_content" required maxLength={300} />
+          </label>
+
+          <label>
+            Twój podpis:
+            <input name="the_signature" type="text" required maxLength={30} />
+          </label>
+
+          <button className="add_button" type="submit" disabled={loading}>
+            {loading ? "DODAWANIE..." : "DODAJ"}
+          </button>
+
+          <button
+            className="cancel_button"
+            type="button"
+            onClick={() => {
+              closeModal();
+              enableScroll();
+            }}
+          >
+            ALBO ZLITUJ SIĘ :)
+          </button>
+        </form>
+      )}
+    </div>
+  );
 };
 
 export default AddCommentModal;
