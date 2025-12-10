@@ -3,7 +3,7 @@ import { collection, addDoc, doc, updateDoc, getDoc } from "firebase/firestore";
 import { DuarealismDb } from "../../AUXILIARY_OBJECTS/DuarealismDB";
 import "./AddCommentModal.scss";
 
-const AddCommentModal = ({ closeModal, addComment }) => {
+const AddCommentModal = ({ closeModal, entry, addComment }) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -16,7 +16,8 @@ const AddCommentModal = ({ closeModal, addComment }) => {
     event.preventDefault();
     setLoading(true);
 
-    const fd = new FormData(event.target);
+    const form = event.target;
+    const fd = new FormData(form);
 
     const newComment = {
       id: Date.now().toString(),
@@ -25,35 +26,38 @@ const AddCommentModal = ({ closeModal, addComment }) => {
     };
 
     try {
+      // 1️⃣ Add comment document to Firestore
       const commentsRef = collection(
         DuarealismDb,
         "DuarealismEntries",
-        "DTlwxRdu5sEIGDXvekSP",
+        entry.entryId,
         "entry_comments"
       );
+      await addDoc(commentsRef, newComment);
 
-      const docRef = await addDoc(commentsRef, newComment);
-
-      // Update parent counter (required by Firestore rules)
-      const entryDocRef = doc(DuarealismDb, "DuarealismEntries", "DTlwxRdu5sEIGDXvekSP");
-      const entrySnap = await getDoc(entryDocRef);
-      const currentCount = entrySnap.data().entry_comments_count || 0;
-
-      await updateDoc(entryDocRef, {
-        entry_comments_count: currentCount + 1
+      // 2️⃣ Increase comment count in the parent document
+      const parentRef = doc(DuarealismDb, "DuarealismEntries", entry.entryId);
+      const parentSnap = await getDoc(parentRef);
+      const currentCount = parentSnap.data().entry_comments_count || 0;
+      await updateDoc(parentRef, {
+        entry_comments_count: currentCount + 1,
       });
 
-      addComment(newComment, docRef.id);
+      // 3️⃣ Immediately update frontend
+      // ✅ Use entry.entryId (not entryKey) to match main page
+      addComment(entry.entryId, newComment, newComment.id);
 
+      // 4️⃣ UI feedback
       setSuccess(true);
+      form.reset();
 
       setTimeout(() => {
         closeModal();
         enableScroll();
       }, 1500);
-
     } catch (error) {
       console.error("Error adding comment: ", error);
+      alert("Nie udało się dodać komentarza!");
     } finally {
       setLoading(false);
       localStorage.setItem("signature", newComment.signature);
@@ -65,32 +69,42 @@ const AddCommentModal = ({ closeModal, addComment }) => {
       {success ? (
         <div className="success-message">✅ KOMENTARZ DODANY!</div>
       ) : (
-        <form className="add_employee_form" onSubmit={submitComment}>
-          <label>
-            Twój komentarz:
-            <textarea name="the_content" required maxLength={300} />
-          </label>
+        <>
+          <form className="add_comment_form" onSubmit={submitComment}>
+            <label>
+              Twój komentarz:
+              <textarea name="the_content" required maxLength={300} />
+            </label>
 
-          <label>
-            Twój podpis:
-            <input name="the_signature" type="text" required maxLength={30} />
-          </label>
+            <label>
+              Twój podpis:
+              <input name="the_signature" type="text" required maxLength={30} />
+            </label>
 
-          <button className="add_button" type="submit" disabled={loading}>
-            {loading ? "DODAWANIE..." : "DODAJ"}
-          </button>
+            <button className="add_button" type="submit" disabled={loading}>
+              {loading ? "DODAWANIE..." : "DODAJ"}
+            </button>
 
-          <button
-            className="cancel_button"
-            type="button"
-            onClick={() => {
-              closeModal();
-              enableScroll();
-            }}
-          >
-            ALBO ZLITUJ SIĘ :)
-          </button>
-        </form>
+            <button
+              className="cancel_button"
+              type="button"
+              onClick={() => {
+                closeModal();
+                enableScroll();
+              }}
+            >
+              ALBO ZLITUJ SIĘ :)
+            </button>
+          </form>
+
+          <div className="image_box">
+            <img
+              className={entry.entry_position === "vertical" ? "image_vertical" : "image_horizontal"}
+              src={entry.entryURL}
+              alt="preview"
+            />
+          </div>
+        </>
       )}
     </div>
   );

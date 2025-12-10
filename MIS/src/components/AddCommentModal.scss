@@ -131,31 +131,30 @@ textarea {
 @media (max-width: 720px) {
 
 
-    #add_comment_modal form label input,
-    textarea {
-        width: 11rem;
+    #add_comment_modal form label {
+        width: 90vw;
     }
 
-        #add_comment_modal .image_box {
+    #add_comment_modal form label textarea,
+    input {
+        width: 5rem;
+    }
+
+    #add_comment_modal .image_box {
         width: 95vw;
         height: 95vw;
     }
 
 }
 
-@media only screen
-    and (min-device-width: 1024px)
-    and (max-device-width: 1024px)
-    and (min-device-height: 600px)
-    and (max-device-height: 600px)
-    and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1024px) and (min-device-height: 600px) and (max-device-height: 600px) and (-webkit-min-device-pixel-ratio: 2) {
 
     #add_comment_modal .image_box {
         width: 66vh;
         height: 66vh;
     }
 
-        #add_comment_modal form label input,
+    #add_comment_modal form label input,
     textarea {
         height: 1.8rem;
     }
@@ -163,12 +162,7 @@ textarea {
 }
 
 
-@media only screen
-    and (min-device-width: 1640px)
-    and (max-device-width: 1640px)
-    and (min-device-height: 2360px)
-    and (max-device-height: 2360px)
-    and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 1640px) and (max-device-width: 1640px) and (min-device-height: 2360px) and (max-device-height: 2360px) and (-webkit-min-device-pixel-ratio: 2) {
 
     #add_comment_modal .image_box {
         width: 95vw;
@@ -177,12 +171,7 @@ textarea {
 
 }
 
-@media only screen
-    and (min-device-width: 2048px)
-    and (max-device-width: 2048px)
-    and (min-device-height: 2732px)
-    and (max-device-height: 2732px)
-    and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 2048px) and (max-device-width: 2048px) and (min-device-height: 2732px) and (max-device-height: 2732px) and (-webkit-min-device-pixel-ratio: 2) {
 
     #add_comment_modal .image_box {
         width: 95vw;
