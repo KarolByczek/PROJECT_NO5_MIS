@@ -66,16 +66,16 @@ const AddCommentModal = ({ closeModal, entry, addComment, db, collectionName }) 
           <form className="add_comment_form" onSubmit={submitComment}>
             <label>
               Twój komentarz:
-              <textarea name="the_content" required maxLength={300} />
+              <textarea name="the_content" required maxLength={300} placeholder="Do 300 znaków."/>
             </label>
 
             <label>
               Twój podpis:
-              <input name="the_signature" type="text" required maxLength={30} />
+              <input name="the_signature" type="text" required maxLength={30} placeholder="Do 30 znaków."/>
             </label>
 
             <button className="add_button" type="submit" disabled={loading}>
-              {loading ? "DODAWANIE..." : "DODAJ"}
+              {loading ? "DODAWANIE..." : "DODAJ KOMENTARZ"}
             </button>
 
             <button
@@ -86,7 +86,7 @@ const AddCommentModal = ({ closeModal, entry, addComment, db, collectionName }) 
                 enableScroll();
               }}
             >
-              ALBO ZLITUJ SIĘ :)
+              ALBO NIE :)
             </button>
           </form>
 

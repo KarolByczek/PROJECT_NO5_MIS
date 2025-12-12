@@ -76,12 +76,16 @@ const UniformismPage = () => {
   return (
     <>
       <Helmet>
-        <title>DUAREALIZM</title>
+        <title>UNIFORMIZM</title>
       </Helmet>
-
       <HeadStrip />
       <Menu />
-
+      <p className="intro">
+        U N I F O R M I Z M komentuje konkretnego rodzaju zachowania społecznych, jakich, delikatnie mówiąc, 
+        nie brakuje we współczesnym świecie. Stąd przewijającymi się na obrazach postaciami będą bardzo przypominające siebie 
+        nawzajem manekiny. Bez ubrań, bez wyrazu twarzy, a może nawet - jak to manekiny - bez życia. 
+        Reszta na temat znaczenia nazwy.
+      </p>
       <div className="entries_section">
         {entries.map((entry) => (
           <div className="entry" key={entry.entryId || entry.id}>

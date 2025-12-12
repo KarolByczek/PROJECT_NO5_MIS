@@ -6,13 +6,17 @@
     bottom: 0;
     background-color: rgb(242, 125, 86);
     z-index: 55;
-    border: 0.5rem solid rgb(198, 57, 57);
+    border: 0.5rem solid rgb(151, 81, 81);
     border-radius: 0.3rem;
     font-weight: bold;
     padding: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    background-image: url(src/assets/after-2184291_1280.png);
+    background-size: cover;
+    background-position: center;
 }
 
 #add_comment_modal form {
@@ -32,32 +36,48 @@
     width: 100%;
 }
 
+
 #add_comment_modal form label input,
 textarea {
-    width: 15rem;
-    height: 2.4rem;
-}
-
-#add_comment_modal form label input, textarea {
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    width: 15rem;
+}
+
+#add_comment_modal form label input {
+    height: 2.4rem;
+}
+
+#add_comment_modal form label textarea {
+    height: 8rem;
 }
 
 
 #add_comment_modal form button {
-    padding: 0.4rem;
+    padding: 0.6rem;
     border: 2px solid yellowgreen;
     border-radius: 0.5rem;
     background-color: #5bc172;
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+#add_comment_modal form button:hover {
+    border: 2px solid rgb(176, 204, 122);
+    background-color: #97caa3;
+}
+
+#add_comment_modal form button:active {
+    border: 2px solid rgb(219, 228, 200);
+    background-color: #ccddd0;
 }
 
 #add_comment_modal .image_box {
     height: 85vh;
     width: 85vh;
-    border: 1px solid rgb(255, 255, 255);
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,20 +108,7 @@ textarea {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0
-    }
 
-    to {
-        opacity: 1
-    }
-}
-
-#add_comment_modal form button[disabled] {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
 
 @media (max-width: 1180px) {
 
@@ -118,6 +125,10 @@ textarea {
         gap: 0.7rem;
     }
 
+    #add_comment_modal form button {
+        padding: 0.7rem;
+    }
+
     #add_comment_modal .image_box {
         width: 60vh;
         height: 60vh;
@@ -130,15 +141,23 @@ textarea {
 
 @media (max-width: 520px) {
 
+    #add_comment_modal form button {
+        margin: 0.6rem auto 0.1rem auto;
+    }
+
     #add_comment_modal form label {
         width: 90vw;
         font-size: larger;
     }
 
-    #add_comment_modal form label
-    input, textarea {
+    #add_comment_modal form label textarea {
         width: 45%;
-         height: 4rem;
+        height: 6rem;
+    }
+
+    #add_comment_modal form label input {
+        height: 2.8rem;
+        width: 45%;
     }
 
     #add_comment_modal .image_box {
@@ -150,9 +169,21 @@ textarea {
 
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1024px) and (min-device-height: 600px) and (max-device-height: 600px) and (-webkit-min-device-pixel-ratio: 2) {
 
+    #add_comment_modal {
+        flex-direction: row;
+    }
+
+    #add_comment_modal form button {
+        padding: 0.5rem;
+    }
+
     #add_comment_modal .image_box {
-        width: 66vh;
-        height: 66vh;
+        width: 80vh;
+        height: 80vh;
+    }
+
+    #add_comment_modal form label textarea {
+        height: 8rem;
     }
 
     #add_comment_modal form label input,
@@ -162,8 +193,29 @@ textarea {
 
 }
 
+@media only screen and (min-device-width: 1280px) and (max-device-width: 1280px) and (min-device-height: 800px) and (max-device-height: 800px) and (-webkit-min-device-pixel-ratio: 2) {
 
-@media only screen and (min-device-width: 1640px) and (max-device-width: 1640px) and (min-device-height: 2360px) and (max-device-height: 2360px) and (-webkit-min-device-pixel-ratio: 2) {
+    #add_comment_modal form label textarea {
+        height: 8rem;
+    }
+
+}
+
+
+@media (min-height: 1000px) {
+
+    #add_comment_modal form button {
+        padding: 0.6rem;
+        margin: 0;
+    }
+
+    #add_comment_modal form label textarea {
+        height: 6rem;
+    }
+
+    #add_comment_modal form label input {
+        height: 2.8rem;
+    }
 
     #add_comment_modal .image_box {
         width: 95vw;
@@ -172,11 +224,31 @@ textarea {
 
 }
 
-@media only screen and (min-device-width: 2048px) and (max-device-width: 2048px) and (min-device-height: 2732px) and (max-device-height: 2732px) and (-webkit-min-device-pixel-ratio: 2) {
+@media (max-width: 600px) and (orientation: portrait) {
 
-    #add_comment_modal .image_box {
-        width: 95vw;
-        height: 95vw;
+    #add_comment_modal form label textarea {
+        height: 6rem;
     }
 
+    #add_comment_modal form button {
+        margin: 0;
+        padding: 0.5rem;
+    }
+
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+#add_comment_modal form button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

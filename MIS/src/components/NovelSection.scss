@@ -29,21 +29,22 @@
     font-weight: bold;
     text-decoration: none;
     color: black;
-    border: 0.4rem solid rgb(9, 46, 99);
+    border: 0.4rem solid rgb(59, 70, 87);
     border-radius: 1rem;
-    background-color: rgb(70, 150, 214);
+    background-color: rgb(45, 165, 77);
     padding: 0.5rem;
     transition: color 0.3s ease;
   }
 
   .download_link:hover {
-    color: rgb(101, 250, 217);
+    color: rgb(217, 230, 197);
+    background-color: rgb(61, 161, 128);
   }
 
   .download_link:active {
     color: #0c0707;
     background-color: #c7bebe;
-    border-color: #c7bebe;
+    border-color: #868181;
   }
 
   /* The icon itself */

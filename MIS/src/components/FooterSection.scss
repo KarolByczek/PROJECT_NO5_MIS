@@ -7,9 +7,17 @@
      flex-direction: row;
      justify-content: space-evenly;
      align-items: center;
-     margin-top: 3rem;
+     margin-top: 5rem;
  }
 
  .footer_section_signature {
      text-decoration: underline;
+ }
+
+ @media (max-width: 450px) {
+
+    .footer_section {
+        flex-direction: column;
+    }
+
  }

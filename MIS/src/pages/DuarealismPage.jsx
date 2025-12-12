@@ -78,10 +78,14 @@ const DuarealismPage = () => {
       <Helmet>
         <title>DUAREALIZM</title>
       </Helmet>
-
       <HeadStrip />
       <Menu />
-
+      <p className="intro">
+        D U A R E A L I Z M to dosyć prostolinijne w swoim stylu malarstwo. Odcienie tutaj nie zlewają się ze sobą, a wręcz
+        - można powiedzieć - gryzą się. W konsekwencji daje to efekt wyrazistości, bijącego po oczach kontrastu barw.
+        Tematyką zawsze jest natura i człowiek, który nieświadomie znajduje swoje odbicie w otaczającym go świecie przyrody.
+        Reszta na temat znaczenia samej nazwy...
+      </p>
       <div className="entries_section">
         {entries.map((entry) => (
           <div className="entry" key={entry.entryId || entry.id}>

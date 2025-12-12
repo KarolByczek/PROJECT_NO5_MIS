@@ -78,10 +78,14 @@ const ProexistentialismPage = () => {
       <Helmet>
         <title>PROEGZYSTENCJALIZM</title>
       </Helmet>
-
       <HeadStrip />
       <Menu />
-
+      <p className="intro">
+        P R O E G Z Y S T E N C J A L I Z M charakteryzuje się niemałą płynnością kolorów. Jest on próbą przełożenia języka 
+        światła na język farb. To właśnie światło jest tutaj głównym motywem. To przez nie wyraża się dążenie człowieka 
+        do kontaktu (a nawet jedności) z jego żyjącym otoczeniem. Bo to ono zamazuje granicę pomiędzy homo sapiens a całym jego 
+        "rodzeństwem", czy to w świecie zwierząt czy roślin. Reszta na temat znaczenia nazwy...
+      </p>
       <div className="entries_section">
         {entries.map((entry) => (
           <div className="entry" key={entry.entryId || entry.id}>
