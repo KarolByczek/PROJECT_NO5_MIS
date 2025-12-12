@@ -6,6 +6,8 @@ section {
     font-style: italic;
     margin-top: 3%;
     font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
   }
 
   .expo_header .ending {
@@ -27,29 +29,30 @@ section {
       align-items: center;
       gap: 2rem;
       margin-bottom: 5rem;
+      margin-top: 2rem;
 
 
       .entry {
         display: block;
         width: 70vw;
-        border: 0.2rem solid blueviolet;
+        border: 0.2rem solid rgb(106, 26, 244);
         border-radius: 0.4rem;
-        background-image: url(src/assets/texture-1668148_1280.jpg);
+        background-image: url(src/assets/texture-1668148_1281.jpg);
         background-size: cover;
         background-position: center;
         color: black;
-        font-size: larger;
+        font-size: 1.4rem;
         font-weight: 700;
         overflow: hidden;
         text-overflow: ellipsis;
         text-align: justify;
         word-wrap: break-word;
         padding: 2%;
-        transition: all 0.3s;
+        transition: all 0.4s;
       }
 
       .entry:hover {
-        background-image: url(src/assets/background-wide.jpg);
+        background-image: url(src/assets/texture-1668148_1284.jpg);
       }
 
     }
@@ -79,12 +82,6 @@ section {
 
   section .grid_menu_section .entries .entry {
     width: 95vw;
-  }
-
-    .expo_header {
-    display: inline-block;
-    padding: 0 auto;
-    text-align: center;
   }
 
 }
