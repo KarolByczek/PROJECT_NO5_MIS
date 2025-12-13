@@ -81,10 +81,12 @@ const ProexistentialismPage = () => {
       <HeadStrip />
       <Menu />
       <p className="intro">
-        P R O E G Z Y S T E N C J A L I Z M charakteryzuje się niemałą płynnością kolorów. Jest on próbą przełożenia języka 
-        światła na język farb. To właśnie światło jest tutaj głównym motywem. To przez nie wyraża się dążenie człowieka 
-        do kontaktu (a nawet jedności) z jego żyjącym otoczeniem. Bo to ono zamazuje granicę pomiędzy homo sapiens a całym jego 
-        "rodzeństwem", czy to w świecie zwierząt czy roślin. Reszta na temat znaczenia nazwy...
+        P R O E G Z Y S T E N C J A L I Z M charakteryzuje się niemałą płynnością kolorów. Jest próbą przetłumaczenia języka
+        światła na język farb. Bo to właśnie ostre światło jest tutaj głównym narzędziem. To przez nie wyraża się 
+        dążenie człowieka do kontaktu (a nawet jedności) z naturą, czyli główny motyw tego nurtu. To światło zamazuje granicę pomiędzy
+        człowiekiem a jego "kuzynami", czy to w świecie zwierząt czy roślin. Co do nazwy, to chciałem, żeby odzwierciedlała 
+        pozytywne nastawienie do podstawowej wartości życia. Do naszego żyjącego środowiska, które po prostu jest, a więc jest 
+        wystarczającym powodem do radości :)
       </p>
       <div className="entries_section">
         {entries.map((entry) => (
