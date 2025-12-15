@@ -1,46 +1,46 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { collection, QueryDocumentSnapshot, getDocs } from "firebase/firestore";
-import { primaryDb } from "./../../AUXILIARY_OBJECTS/CarouselDB";
+import { primaryDb } from "../../AUXILIARY_OBJECTS/CarouselDB";
 import "./Carousel.scss";
 
 const TRANSITION_MS = 900;
 const AUTOPLAY_MS = 3500;
 const DRAG_THRESHOLD_PX = 40;
 
-const parsePx = (s: string) => {
+const parsePx = (s) => {
   if (!s) return 0;
   return Number(s.replace("px", "").trim()) || 0;
 };
 
-const Carousel: React.FC = () => {
+const Carousel = () => {
   // refs
-  const sliderRef = useRef<HTMLDivElement | null>(null);
-  const viewportRef = useRef<HTMLDivElement | null>(null);
-  const autoRef = useRef<number | null>(null);
+  const sliderRef = useRef(null);
+  const viewportRef = useRef(null);
+  const autoRef = useRef(null);
 
   // data
-  const [slides, setSlides] = useState<string[]>([]);
-  const [slidesPerView, setSlidesPerView] = useState<number>(1);
+  const [slides, setSlides] = useState([]);
+  const [slidesPerView, setSlidesPerView] = useState(1);
 
-  const [cloneCount, setCloneCount] = useState<number>(1);
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  const [cloneCount, setCloneCount] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // geometry
-  const [slideWidthPx, setSlideWidthPx] = useState<number>(0);
-  const [gapPx, setGapPx] = useState<number>(8);
+  const [slideWidthPx, setSlideWidthPx] = useState(0);
+  const [gapPx, setGapPx] = useState(8);
 
   // drag
-  const startXRef = useRef<number | null>(null);
-  const draggingRef = useRef<boolean>(false);
+  const startXRef = useRef(null);
+  const draggingRef = useRef(false);
 
   // --- fetch slides ---
   useEffect(() => {
     const fetchSlides = async () => {
       try {
         const snapshot = await getDocs(collection(primaryDb, "CarouselURLs"));
-        const arr: string[] = [];
-        snapshot.forEach((doc: QueryDocumentSnapshot) => {
+        const arr = [];
+        snapshot.forEach((doc) => {
           arr.push(...Object.values(doc.data()));
         });
         setSlides(arr);
@@ -73,7 +73,7 @@ const Carousel: React.FC = () => {
   const extendedSlides = React.useMemo(() => {
     if (!slides.length) return [];
     const N = slides.length;
-    const arr: string[] = [];
+    const arr = [];
     for (let i = cloneCount; i > 0; i--) arr.push(slides[(N - i + N) % N]);
     arr.push(...slides);
     for (let i = 0; i < cloneCount; i++) arr.push(slides[i % N]);
@@ -248,13 +248,13 @@ const Carousel: React.FC = () => {
   };
 
   // pointer handlers (threshold)
-  const pointerDown = (clientX: number) => {
+  const pointerDown = (clientX) => {
     stopAuto();
     startXRef.current = clientX;
     draggingRef.current = true;
   };
 
-  const pointerMove = (clientX: number) => {
+  const pointerMove = (clientX) => {
     if (!draggingRef.current || startXRef.current == null) return;
     const dx = clientX - startXRef.current;
     if (Math.abs(dx) >= DRAG_THRESHOLD_PX) {

@@ -3,7 +3,7 @@ import { counter01Db } from "../../AUXILIARY_OBJECTS/Counter01";
 import "./NovelSection.scss";
 import { doc, updateDoc, increment } from "firebase/firestore";
 
-const NovelSection: React.FC = () => {
+const NovelSection = () => {
 
   const handleDownload01 = async () => {
     const counterRef = doc(counter01Db, "PortraitData", "NsXOGRWHw71ZuLGxy2BQ");
@@ -27,7 +27,7 @@ const NovelSection: React.FC = () => {
         Pobierzcie za darmo mój autorski thriller z akcją w mieście Lublin.
       </p>
       <a
-        href="/MAT_PODST_PODR_MP3_TRACK001.mp3"
+        href="./MAT_PODST_PODR_MP3_TRACK001.mp3"
         download
         className="download_link"
         onClick={handleDownload01}

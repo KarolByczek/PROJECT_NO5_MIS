@@ -1,8 +1,8 @@
 import HeadStrip from './components/HeadStrip';
 import Menu from './components/Menu';
 import Carousel from "./components/Carousel";
-import NovelSection from "./components/NovelSection.tsx";
-import FooterSection from "./components/FooterSection.tsx";
+import NovelSection from "./components/NovelSection";
+import FooterSection from "./components/FooterSection";
 import "./HomePage.scss"
 import { Link } from 'react-router';
 import { Helmet } from 'react-helmet-async';

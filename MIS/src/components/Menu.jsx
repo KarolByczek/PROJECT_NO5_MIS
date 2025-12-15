@@ -14,7 +14,7 @@ const Menu = () => {
     const location = useLocation();
     const [activeLink, setActiveLink] = useState(location.pathname);
 
-    const onClickHandler = (path: string) => {
+    const onClickHandler = (path) => {
         setActiveLink(path);
     };
 
