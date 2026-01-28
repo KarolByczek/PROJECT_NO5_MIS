@@ -19,16 +19,18 @@
     text-align: justify;
     word-wrap: break-word;
     padding: 0 1.5rem 6rem 1.5rem;
-    
+
   }
 
   .download_link {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 0.5rem;
     font-weight: bold;
     text-decoration: none;
     color: black;
+    width: fit-content;
     border: 0.4rem solid rgb(59, 70, 87);
     border-radius: 1rem;
     background-color: rgb(61, 161, 128);
@@ -84,21 +86,28 @@
     }
   }
 
-  @media (max-width: 450px) {
-    .download_link {
-      color: rgb(101, 250, 217);
-      padding: 0.6rem;
-      font-size: 1.5rem;
-      width: 90%;
-    }
 
-    .download_link .icon {
-      animation: wiggle 0.4s ease-in-out infinite;
-      font-size: 2rem;
-      display: inline-block;
-      font-size: 190%;
-    }
+  img {
+    width: 20%;
+    height: auto;
+  }
 
+}
+
+
+@media (max-width: 450px) {
+  .download_link {
+    color: rgb(101, 250, 217);
+    padding: 0.6rem;
+    font-size: 1.5rem;
+    width: fit-content;
+  }
+
+  .download_link .icon {
+    animation: wiggle 0.4s ease-in-out infinite;
+    font-size: 2rem;
+    display: inline-block;
+    font-size: 190%;
   }
 
 }

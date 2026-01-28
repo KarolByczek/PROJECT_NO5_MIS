@@ -5,17 +5,17 @@ const FooterSection = () => {
         <div className="footer_section">
             <ul>
                 <li>
-                    email address: florianmusial86@gmail.com
+                    adres e-mail: florianmusial86@gmail.com
                 </li>
                 <li>
-                    facebook profile: ........................
+                    profil facebookowy: https://www.facebook.com/profile.php?id=61585101702706
                 </li>
                 <li>
-                    This page URL: ..........................
+                    URL tej strony: ..........................
                 </li>
             </ul>
             <p className='footer_section_signature'>
-                Florian Musiał 2025
+                Florian Musiał 2026
             </p>
         </div>
     )
