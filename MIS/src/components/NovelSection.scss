@@ -28,6 +28,7 @@
     align-items: center;
     gap: 0.5rem;
     font-weight: bold;
+    font-size: 2rem;
     text-decoration: none;
     color: black;
     width: fit-content;
@@ -96,18 +97,23 @@
 
 
 @media (max-width: 450px) {
-  .download_link {
-    color: rgb(101, 250, 217);
-    padding: 0.6rem;
-    font-size: 1.5rem;
-    width: fit-content;
+
+  .novel_section {
+
+    .download_link {
+      color: rgb(101, 250, 217);
+      padding: 0.6rem;
+      font-size: 1.4rem;
+      width: fit-content;
+    }
+
+    .download_link .icon {
+      animation: wiggle 0.4s ease-in-out infinite;
+      font-size: 2rem;
+      display: inline-block;
+      font-size: 190%;
+    }
   }
 
-  .download_link .icon {
-    animation: wiggle 0.4s ease-in-out infinite;
-    font-size: 2rem;
-    display: inline-block;
-    font-size: 190%;
-  }
 
 }

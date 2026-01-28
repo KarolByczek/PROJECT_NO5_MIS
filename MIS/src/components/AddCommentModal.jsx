@@ -86,7 +86,7 @@ const AddCommentModal = ({ closeModal, entry, addComment, db, collectionName }) 
                 enableScroll();
               }}
             >
-              ALBO NIE :)
+              ...ALBO NIE :)
             </button>
           </form>
 
