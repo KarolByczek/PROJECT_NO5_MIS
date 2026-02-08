@@ -7,12 +7,15 @@ section {
     margin-top: 3%;
     font-size: 1.8rem;
     display: flex;
+    flex-direction: row;
     justify-content: center;
+
+    .ending {
+      font-size: 1.8rem;
+    }
+
   }
 
-  .expo_header .ending {
-    font-size: 1.8rem;
-  }
 
   .grid_menu_section {
     font-family: 'Times New Roman', Times, serif;
@@ -80,6 +83,10 @@ section {
 
 @media (max-width: 720px) {
 
+  section .expo_header {
+    flex-direction: column;
+  }
+
   section .grid_menu_section .entries .entry {
     width: 95vw;
   }
@@ -91,8 +98,6 @@ section {
   section .expo_header {
     font-size: 1.8rem;
     text-align: center;
-    display: flex;
-    flex-direction: column;
   }
 
   section .grid_menu_section .entries .entry:active {

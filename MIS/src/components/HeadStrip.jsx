@@ -6,7 +6,7 @@ const HeadStrip = () => {
     <Link to="/">
       <div className='headstrip'>
         <p>
-          GALERIA <span className='header_name'>FLORIAN MUSIAŁ</span> <span className='header_city'>-LUBLIN</span>
+          GALERIA <span className='header_name'>FLORIANA MUSIAŁA</span>
         </p>
       </div>
     </Link>

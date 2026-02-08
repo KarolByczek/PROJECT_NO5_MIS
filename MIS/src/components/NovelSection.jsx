@@ -12,6 +12,7 @@ const NovelSection = () => {
       await updateDoc(counterRef, {
         the_unwelcomers_dwnld_counter: increment(1)
       });
+      window.alert("PLIK ŚCIĄGNIĘTY")
 
     } catch (error) {
       console.error("Error updating counter: ", error);
@@ -36,7 +37,7 @@ const NovelSection = () => {
         <span className="icon">&#8681;</span>
         <img src="./src/assets/NIEMILEWIDZIANI - okładka.png" alt="okładka" />
       </a>
-      
+
     </div>
   );
 };
