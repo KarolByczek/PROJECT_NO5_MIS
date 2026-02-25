@@ -43,7 +43,7 @@
 .entries_section .entry .main_chunk .image_box .image_vertical {
     height: 100%;
     width: auto;
-    border: 2px solid #8f2a2a;
+    border: 2px solid #153e3d;
 }
 
 .entries_section .entry .main_chunk .image_box .image_horizontal {
@@ -51,7 +51,7 @@
     flex-direction: column;
     width: 100%;
     height: auto;
-    border: 2px solid #8f2a2a;
+    border: 2px solid #153e3d;
 }
 
 .entries_section .entry .main_chunk .about {
@@ -92,6 +92,9 @@
     padding-top: 1rem;
     height: 14rem;
     background-color: rgb(76, 189, 189);
+    border: 0.2rem solid rgb(83, 131, 88);
+    border-radius: 0.3rem;
+    scrollbar-width: none;
 
 }
 

@@ -84,7 +84,7 @@ const DuarealismPage = () => {
         D U A R E A L I Z M to dosyć prostolinijne w swoim stylu malarstwo. Odcienie nie zlewają się tutaj ze sobą, a nawet
         - można powiedzieć - gryzą się. W rezultacie daje to efekt wyrazistości, bijącego po oczach kontrastu barw.
         Tematyką zawsze jest natura i człowiek, który nieświadomie znajduje swoje odbicie w otaczającym go świecie przyrody.
-        Nazwa pochodzi od dwóch członów: angielskiego "dual", czyli "podwójne" (odniesienie do obydwu warstw obrazu: ludzkiej oraz 
+        Nazwa pochodzi od dwóch członów: "dual", czyli "podwójne" (odniesienie do obydwu warstw obrazu: ludzkiej oraz 
         przyrodniczej), i "arealizm", a więc coś nie do końca realistycznego, prymitywnego w swoim warsztacie.
       </p>
       <div className="entries_section">

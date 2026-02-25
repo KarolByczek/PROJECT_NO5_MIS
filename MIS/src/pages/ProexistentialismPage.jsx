@@ -82,10 +82,10 @@ const ProexistentialismPage = () => {
       <Menu />
       <p className="intro">
         P R O E G Z Y S T E N C J A L I Z M charakteryzuje się niemałą płynnością kolorów. Jest próbą przetłumaczenia języka
-        światła na język farb. Bo to właśnie ostre światło jest tutaj głównym narzędziem. To przez nie wyraża się 
-        dążenie człowieka do kontaktu (a nawet jedności) z naturą, czyli główny motyw tego nurtu. To światło zamazuje granicę pomiędzy
-        człowiekiem a jego "kuzynami", czy to w świecie zwierząt czy roślin. Co do nazwy, to chciałem, żeby odzwierciedlała 
-        pozytywne nastawienie do podstawowej wartości życia. Do naszego żyjącego środowiska, które po prostu jest, a więc jest 
+        ciała na język uczuć. Bo to właśnie ciało jest tutaj głównym narzędziem. To przez nie wyraża się
+        dążenie człowieka do kontaktu (a nawet jedności) z naturą, czyli główny motyw tego nurtu. To właśnie nagie ciało zamazuje granicę pomiędzy
+        człowiekiem a całą resztą. Co do nazwy, to chciałem, żeby odzwierciedlała
+        pozytywne nastawienie każdego z obrazów do podstawowej wartości życia. Do naszego żyjącego środowiska, które po prostu jest, a więc jest
         wystarczającym powodem do radości :)
       </p>
       <div className="entries_section">

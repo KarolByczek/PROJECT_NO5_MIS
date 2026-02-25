@@ -25,7 +25,7 @@ function HomePage() {
           <div className='entries'>
             <Link to="/duarealizm">
               <div className='entry entry_duarealism'>
-                D U A R E A L I Z M to dosyć prostolinijne w swoim stylu malarstwo. Odcienie nie zlewają się tutaj ze sobą, a nawet
+                D U A R E A L I Z M to dosyć prostolinijne w swoim stylu obrazy. Odcienie nie zlewają się tutaj ze sobą, a nawet
                 - można powiedzieć - gryzą się. W rezultacie daje to efekt wyrazistości, bijącego po oczach kontrastu barw.
                 Tematyką zawsze jest natura i człowiek, który nieświadomie znajduje swoje odbicie w otaczającym go świecie przyrody...
               </div>
@@ -33,16 +33,16 @@ function HomePage() {
             <Link to="/proegzystencjalizm">
               <div className='entry entry_proexistentialism'>
                 P R O E G Z Y S T E N C J A L I Z M charakteryzuje się niemałą płynnością kolorów. Jest próbą przetłumaczenia języka
-                światła na język farb. Bo to właśnie ostre światło jest tutaj głównym narzędziem. To przez nie wyraża się
-                dążenie człowieka do kontaktu (a nawet jedności) z naturą, czyli główny motyw tego nurtu. To światło zamazuje granicę pomiędzy
-                człowiekiem a jego "kuzynami", czy to w świecie zwierząt czy roślin....
+                ciała na język uczuć. Bo to właśnie ciało jest tutaj głównym narzędziem. To przez nie wyraża się
+                dążenie człowieka do kontaktu (a nawet jedności) z naturą, czyli główny motyw tego nurtu. To właśnie nagie ciało zamazuje granicę pomiędzy
+                człowiekiem a całą resztą...
               </div>
             </Link>
             <Link to="/uniformizm">
               <div className='entry entry_uniformism'>
-                U N I F O R M I Z M komentuje zachowania społeczne, jakich, delikatnie mówiąc, nie brakuje we współczesnym świecie.
-                Stąd przewijającymi się na obrazach postaciami będą bardzo przypominające siebie nawzajem manekiny. Bez ubrań, bez wyrazu 
-                twarzy, a może nawet - jak to manekiny - bez życia... Coś na temat stylu...
+                U N I F O R M I Z M przedstawia te zachowania społeczne, jakich, delikatnie mówiąc, nie brakuje we współczesnym świecie.
+                Przewijającymi się tu postaciami będą nieco upiorne manekiny. Bez ubrań, bez wyrazu 
+                twarzy, a może nawet - jak to manekiny - bez życia...
               </div>
             </Link>
           </div>

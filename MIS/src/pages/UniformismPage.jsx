@@ -81,9 +81,10 @@ const UniformismPage = () => {
       <HeadStrip />
       <Menu />
       <p className="intro">
-        U N I F O R M I Z M komentuje zachowania społeczne, jakich, delikatnie mówiąc, nie brakuje we współczesnym świecie.
-        Stąd przewijającymi się na obrazach postaciami będą bardzo przypominające siebie nawzajem manekiny. Bez ubrań, bez wyrazu
-        twarzy, a może nawet - jak to manekiny - bez życia...
+        U N I F O R M I Z M przedstawia te zachowania społeczne, jakich, delikatnie mówiąc, nie brakuje we współczesnym świecie.
+        Przewijającymi się tu postaciami będą nieco upiorne manekiny. Bez ubrań, bez wyrazu
+        twarzy, a może nawet - jak to manekiny - bez życia. Nazwa to odniesienie do masowego powielania się wspomnianych zachowań oraz 
+        ich wszechobecnego występowania, czyli uniformizacji.
       </p>
       <div className="entries_section">
         {entries.map((entry) => (
