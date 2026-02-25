@@ -10,9 +10,6 @@ const FooterSection = () => {
                 <li>
                     profil facebookowy: https://www.facebook.com/profile.php?id=61585101702706
                 </li>
-                <li>
-                    URL tej strony: ..........................
-                </li>
             </ul>
             <p className='footer_section_signature'>
                 Florian Musiał 2026
