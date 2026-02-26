@@ -40,7 +40,7 @@ section {
         width: 70vw;
         border: 0.2rem solid rgb(106, 26, 244);
         border-radius: 0.4rem;
-        background-image: url(src/assets/texture-1668148_1281.jpg);
+        background-image: url(../assets/texture-1668148_1281.jpg);
         background-size: cover;
         background-position: center;
         color: black;
@@ -55,7 +55,7 @@ section {
       }
 
       .entry:hover {
-        background-image: url(src/assets/texture-1668148_1284.jpg);
+        background-image: url(../assets/texture-1668148_1284.jpg);
       }
 
     }
@@ -63,7 +63,7 @@ section {
   }
 
   footer {
-    background-image: url(src/assets/artwork-7141107_1280.png);
+    background-image: url(../assets/artwork-7141107_1280.png);
     background-size: cover;
     background-position: center;
     height: 25vh;
@@ -101,7 +101,7 @@ section {
   }
 
   section .grid_menu_section .entries .entry:active {
-    background-image: url(src/assets/background-wide.jpg);
+    background-image: url(../assets/background-wide.jpg);
   }
 
 }
